@@ -1,0 +1,392 @@
+
+.MEDICAL_TEXT{
+position: relative;
+  bottom: -40px;
+   font-family: sans-serif;
+   letter-spacing: -1px;
+}
+.underline_Dental{
+    border-bottom: 3px solid black;
+    display: inline-block;
+    width: 100%; 
+    margin: 0 5px; 
+}
+.patient_information{
+font-family: sans-serif;
+}
+.patient_name{
+font-family: sans-serif;
+position: relative;
+bottom: 15px;
+}
+.patient_name1{
+font-family: sans-serif;
+position: relative;
+bottom: 30px; 
+}
+.patient_name2{
+font-family: sans-serif;
+position: relative;
+bottom: 45px; 
+}
+.underline1{
+    text-align: center;
+     vertical-align: bottom;         
+    border-bottom: 1px solid black; 
+    display: inline-block;        
+    width: 415px;                
+    margin: 0 5px;                 
+    position: relative;           
+    line-height: 1;
+    bottom: 1px;
+}
+.underline2{
+    text-align: right;
+    vertical-align: bottom;         
+    border-bottom: 1px solid black; 
+    display: inline-block;        
+    width: 60px;                
+    margin: 0 5px;                 
+    position: relative;           
+    line-height: 1;
+    bottom: 1px; 
+    margin-right: -1px;
+}
+.underline3{
+    text-align: center;
+     vertical-align: bottom;         
+    border-bottom: 1px solid black; 
+    display: inline-block;        
+    width: 380px;                
+    margin: 0 5px;                 
+    position: relative;           
+    line-height: 1;
+    bottom: 1px;
+}
+.underline4{
+    text-align: center;
+     vertical-align: bottom;         
+    border-bottom: 1px solid black; 
+    display: inline-block;        
+    width: 90px;                
+    margin: 0 5px;                 
+    position: relative;           
+    line-height: 1;
+    bottom: 1px;
+}
+.legalguardiantext{
+   text-indent: 65px;
+    font-size: 15px;
+    bottom: 45px;
+    position: relative;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+
+}
+.Refusal{
+    position: relative;
+    top: -15px;
+    
+}
+.Refusa{
+    position: relative;
+    top: -15px;
+    font-family: sans-serif;
+}
+.paragraph1 {
+    font-family: sans-serif;
+    position: relative;
+    top: 15px;
+    text-indent: 6px;
+}
+.div1{
+position: relative;
+top: -45px;
+text-align: justify;
+}
+.Healthcare{
+position: relative;
+top: -30px;
+left: 15px;
+}
+.underline5{
+text-align: center;
+     vertical-align: bottom;         
+    border-bottom: 1px solid black; 
+    display: inline-block;        
+    width: 230px;                
+    margin: 0 5px;                 
+    position: relative;           
+    line-height: 1;
+    bottom: 1px;
+    font-weight: normal;
+    font-family: sans-serif;
+}
+.underline6{
+     vertical-align: bottom;         
+    border-bottom: 2px solid black; 
+    display: inline-block;        
+    width: 320px;                
+    margin: 0 5px;                 
+    position: relative;           
+    line-height: 1;
+    bottom: 1px;
+    font-weight: normal;
+    font-family: sans-serif;
+}
+.underline7{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 290px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif;
+}
+.underline8{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 290px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif;
+}
+.underline9{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 315px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif; 
+}
+.underline10{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 230px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif; 
+}
+.underline11{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 230px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif; 
+}
+.underline12{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 150px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif; 
+}
+.underline13{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 184px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif; 
+}
+.underline14{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 255px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif; 
+}
+.underline15{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 215px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif; 
+}
+.underline16{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 1px solid black; 
+display: inline-block;        
+width: 140px;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 1px;
+font-weight: normal;
+font-family: sans-serif; 
+}
+.underline17{
+font-weight: normal;
+text-align: center;
+vertical-align: bottom;         
+border-bottom: 2px solid black; 
+display: inline-block;        
+width:100%;                
+margin: 0 5px;                 
+position: relative;           
+line-height: 1;
+bottom: 100px;
+font-weight: normal;
+font-family: sans-serif;
+}
+.Clinic_hospital{
+position: relative;
+top: -45px;
+left: 15px;
+}
+.Reason{
+position: relative;
+top: -60px;
+left: 15px;
+}
+.understand{
+position:relative;
+top: -70px;
+text-indent: 10%;
+font-family: sans-serif;
+}
+.acknowledgement{
+position: relative;
+top: -75px;
+
+}
+.paragraph2{
+position: relative;
+text-indent: 10%;
+top: -90px;
+font-family: sans-serif;
+}
+.Release_waiver{
+position: relative;
+top: -90px;
+}
+.paragraph3{
+position: relative;
+text-indent: 10%;
+top: -105px;
+font-family: sans-serif;  
+}
+.Emergency_contact{
+position: relative;
+top: -105px;
+}
+.paragraph4{
+position: relative;
+text-indent: 10%;
+top: -120px;
+font-family: sans-serif;  
+}
+.Contact_name{
+position: relative;
+top: -120px;
+left: 15px;
+}
+.Relationship_patient{
+position: relative;
+top: -135px;
+left: 15px;
+}
+.Phone_number{
+position: relative;
+top: -150px;
+left: 15px;
+}
+.paragraph5{
+position: relative;
+text-indent: 9%;
+top: -150px;
+font-family: sans-serif;    
+}
+.Patient_signature{
+position: relative;
+top: -155px;
+left: 10px;
+}
+.patient_minor{
+position: relative;
+top: -155px;
+left: 10px;  
+}
+.Parent_Guardian{
+position: relative;
+top: -170px;
+left: 10px;   
+}
+.Witness{
+position: relative;
+top: -170px;
+left: 10px;  
+}
+.name{
+position: absolute;
+top: 53.5%;
+left: 10px;    
+}
+.Signature{
+position: absolute;
+top: 54.9%;
+left: 10px;   
+}
+.content{
+position: relative;
+top: -20px;
+}

@@ -1,0 +1,116 @@
+.bond-paper {
+    position:fixed;
+    top: 90px;
+     }
+     .MEDICAL_TEXT{
+       position: relative;
+       bottom: -15px;
+       font-family: sans-serif;
+       letter-spacing: -1px;
+     }
+     .title{
+       font-family: sans-serif;
+       letter-spacing: 10px;
+     }
+     .text_content{
+     font-family: sans-serif;
+     font-size: 20px;
+     position: relative;
+     top: 55px;
+     text-align: justify;
+     }
+
+     .underline_Dental{
+     border-bottom: 3px solid black;
+     display: inline-block;
+     width: 100%; 
+     margin: 0 5px; 
+     }
+     .underline {
+     text-align: center;
+     vertical-align: bottom;         
+     border-bottom: 2px solid black; 
+     display: inline-block;        
+     width: 315px;                
+     margin: 0 5px;                 
+     position: relative;           
+     line-height: 1;
+     bottom: 1px;
+     }
+     .underline_signature1{
+     width: 285px;
+     border-bottom: 2px solid black;
+     float: right;
+     position: relative;
+     bottom: -145px;
+     font-family: sans-serif;
+     font-size: 17px;
+     text-align: center;
+     vertical-align: bottom;           
+     display: inline-block;                           
+     margin: 2 5px;                         
+     line-height: 0em;
+     padding-bottom: 9px;
+       
+     }
+     .underline_personnel{
+     width: 285px;
+     border-bottom: 2px solid black;
+     float: left;
+     position: relative;
+     bottom: -283px;
+     display: inline-block;
+     font-family: sans-serif;
+     padding-bottom: 9px;
+     line-height: 0em;
+     text-align: center;
+     font-size: 17px;
+     }
+     .Signature1{
+     float: right;
+     position: relative;
+     bottom: -139px;
+     font-family: sans-serif;
+     font-size: 17px;
+     left: 25.5%;
+     }
+     .Signature2{
+        position: relative;
+        bottom: -258px;
+        font-family: sans-serif;
+        font-size: 17px;
+      
+     }
+     .witness{
+       position: relative;
+       bottom: -330px;
+       font-family: sans-serif;
+       font-size: 17px;
+     }
+     .underline5{
+       text-align: center;
+       font-family: sans-serif;
+       font-size: 17px;
+       width: 285px;
+       border-bottom: 2px solid black;
+       float: left;
+       position: relative;
+       bottom: -394px;
+       display: inline-block;
+       left: 23px;
+       line-height: 0em;
+       padding-bottom: 9px;
+     }
+     .underline6{
+      width: 285px;
+       border-bottom: 2px solid black;
+      float: right;
+      position: relative;
+       bottom: -396px;
+       display: inline-block;
+       left: -16px;
+       line-height: 0em;
+       padding-bottom: 9px;
+       text-align: center;
+       font-size: 17px;
+     }

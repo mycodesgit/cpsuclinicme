@@ -1,0 +1,97 @@
+.navbar-light .navbar-nav .nav-link.active{
+    background-color: #358359 !important ;
+    color: #fff !important;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+.navbar-light .navbar-nav .nav-link:hover{
+    background-color: #358359 !important ;
+    color: #fff !important;
+    border-radius: 3px;
+}
+.nav-item {
+    /*border: 1px solid gray;
+    border-radius: 5px;*/
+    margin-right: 2px !important;
+    justify-content: space-between !important;
+}
+.bg-greenn{
+    background-color: #1f5036;
+    color: #fff !important;
+}
+.nav-link{
+    color: #000 !important;
+}
+.btn-app1 {
+  border-radius: 3px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #6c757d;
+  font-size: 12px;
+  height: 60px;
+  margin: 0 0 10px 10px;
+  min-width: 80px;
+  padding: 15px 5px;
+  position: relative;
+  text-align: center;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff !important;
+    background-color: #358359 !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+.btn-save {
+    background-color: #358359 !important;
+    border-color: #358359 !important;
+}
+.card-curve {
+    border-radius: 10px; 
+    box-shadow: 0px 5px 24px rgba(0, 0, 0, 0.1) !important;
+}
+a.list-group-item {
+    font-size: 12pt !important;
+    color: #000 !important;
+    padding: 8px !important;
+}
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+a.list-group-item.active,
+button.list-group-item:focus,
+button.list-group-item:hover {
+    /*background-color: #04401f !important;*/
+    background-color: #1f5036 !important;
+    color: #fff !important;
+    border-color: #04401f !important;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff !important;
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #1f5036 !important;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
