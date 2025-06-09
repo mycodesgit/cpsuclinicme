@@ -16,7 +16,7 @@ class DashboardController extends Controller
 {
     public function dash()
     {
-        $patients = Patients::where('campus', Auth::guard('web')->user()->campus)->count();
+        $patients = Patients::count();
         $users = User::all();
 
         $pstudent = Patients::where('category', '=', 'Student')->get();
