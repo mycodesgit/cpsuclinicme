@@ -9,7 +9,7 @@
 <div class="mt-3" style="font-size: 13pt;">
     <div class="nav flex-column nav-pills nav-stacked nav-tabs-right h-100" aria-orientation="vertical">
         <a class="nav-link {{ $patientAddActive }}" href="{{ route('patientAdd') }}">Add Patient</a>
-        <a class="nav-link {{ $patientNewActive }}" href="{{ route('studentUpcomingRead') }}">Upcomming</a>
+        <a class="nav-link {{ $patientNewActive }}" href="{{ route('studentUpcomingRead') }}">Upcoming</a>
         <a class="nav-link {{ $studentActive }}" href="{{ route('studentRead') }}">Student</a>
 
 
