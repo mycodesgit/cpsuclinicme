@@ -15,7 +15,7 @@ class FileController extends Controller
 {
     public function fileRead(Request $request, $id)
     {
-        $patient = Patients::where('stid', $id)->first();
+        $patient = Patients::where('id', $id)->first();
 
         $files = File::where('patient_id', $id)->get();
         
