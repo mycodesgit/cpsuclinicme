@@ -71,7 +71,7 @@
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editFileModal" onclick="editFile()">
                                         <i class="fas fa-edit"></i> Rename
                                     </a>
-                                    <a class="dropdown-item" href="{{ asset('Uploads/' . $file->file) }}" target="_blank">
+                                    <a class="dropdown-item" href="{{ asset('storage/Uploads/' . $file->file) }}" target="_blank">
                                         <i class="fas fa-eye"></i> View
                                     </a>
                                     <button class="dropdown-item btn btn-danger file-delete" data-id="{{ $file->id }}" type="button">

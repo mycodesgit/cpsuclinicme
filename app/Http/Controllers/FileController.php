@@ -31,10 +31,10 @@ class FileController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME); // without extension
-            $fileName = str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT) . '_' . $originalFileName . '.pdf';
+            $fileName = str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT) . '_' . $originalFileName;
 
             while (Storage::disk('public')->exists('Uploads/' . $fileName)) {
-                $fileName = str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT) . '_' . $originalFileName . '.pdf';
+                $fileName = str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT) . '_' . $originalFileName;
             }
 
             $path = $file->storeAs('Uploads', $fileName, 'public');
