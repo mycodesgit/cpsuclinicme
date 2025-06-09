@@ -11,9 +11,10 @@
         <div class="card">
             <div class="card-body">
                 <div class="">
-                    <div class="mt-3" style="font-size: 13pt;">
-                        @include('control.side_menu')
+                    <div class="page-header" style="border-bottom: 1px solid #04401f;">
+                        <h4>Menu</h4>
                     </div>
+                    @include('control.side_menu')
                 </div>
             </div>
         </div>
@@ -180,15 +181,18 @@
                                 <label class="badge badge-secondary">College/Department</label>
                                 <select class="form-control form-control-sm select2" name="studCollege" id="collegeSelect">
                                     <option disabled selected> --Select-- </option>
-                                    {{-- @foreach($col as $college)
-                                        <option value="{{ $college }}">{{ $college }}</option>
-                                    @endforeach --}}
+                                    @foreach($col as $college)
+                                        <option value="{{ $college->college_abbr }}">{{ $college->college_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="badge badge-secondary">Course</label>
                                 <select class="form-control form-control-sm select2" name="studCourse" id="courseSelect">
+                                    @foreach($prog as $dataprog)
+                                        <option value="{{ $dataprog->progAcronym }}">{{ $dataprog->progAcronym }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

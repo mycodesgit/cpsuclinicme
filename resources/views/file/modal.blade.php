@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <form id="uploadForm" method="POST" action="{{ route('fileCreate', ['id' => request('id')]) }}" enctype="multipart/form-data">
                     @csrf
-                    <input type="text" name="patient_id" id="" value="{{ request('id') }}">
+                    <input type="hidden" name="patient_id" id="" value="{{ request('id') }}">
                     <div class="form-group">
                         <label for="file">Choose File:</label>
                         <input type="file" class="form-control-file" accept=".pdf" id="file" name="file" required>

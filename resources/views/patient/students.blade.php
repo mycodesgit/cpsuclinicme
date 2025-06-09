@@ -7,9 +7,10 @@
         <div class="card">
             <div class="card-body">
                 <div class="">
-                    <div class="mt-3" style="font-size: 13pt;">
-                        @include('control.side_menu')
+                    <div class="page-header" style="border-bottom: 1px solid #04401f;">
+                        <h4>Menu</h4>
                     </div>
+                    @include('control.side_menu')
                 </div>
             </div>
         </div>

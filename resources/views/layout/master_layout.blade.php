@@ -358,8 +358,14 @@ $(document).ready(function() {
     });
 });
 </script>
+
 <script>
 $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $('.file-delete').on('click', function() {
         var fileId = $(this).data('id');
         var row = $('#tr-file-' + fileId);
@@ -414,6 +420,7 @@ $(document).ready(function() {
     });
 });
 </script>
+
 <script>
 $(document).ready(function() {
     $('.complaint-delete').on('click', function() {

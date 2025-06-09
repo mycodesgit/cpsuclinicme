@@ -30,14 +30,12 @@ class PatientController extends Controller
     public function patientAdd() 
     {
         $regions = Region::all();
-        // $col = Program::where('campus', Auth::user()->campus)
-        // ->distinct()
-        // ->pluck('progCollege');
-
+        $col = College::whereIn('id', [2, 3, 4, 5, 6, 7, 8])->get();
+        $prog = EnPrograms::orderBy('progAcronym', 'ASC')->get();
         $patients = Patients::all();
         
         //$offices = Office::all();
-        return view('patient.patient_add', compact('patients', 'regions'));
+        return view('patient.patient_add', compact('patients', 'regions', 'col', 'prog'));
     }
 
     public function studentRead() 

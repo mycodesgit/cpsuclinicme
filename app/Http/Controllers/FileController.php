@@ -54,26 +54,28 @@ class FileController extends Controller
         }
     }
 
-    public function deleteFile($id){
-
-        $file = File::find($id); 
+    public function deleteFile($id)
+    {
+        $file = File::find($id);
 
         if ($file) {
+            $storagePath = 'Uploads/' . $file->file;
 
-            $file_path = public_path('Uploads/'.$file->file);
-            if(file_exists( $file_path )){
-                unlink($file_path);
+            if (Storage::disk('public')->exists($storagePath)) {
+                Storage::disk('public')->delete($storagePath);
             }
+
             $file->delete();
-        
+
             return response()->json([
                 'status' => 200,
-                'file' => $id, 
+                'file' => $id,
             ]);
         }
+
         return response()->json([
             'status' => 404,
-            'message' => 'Medicine not found',
+            'message' => 'File not found',
         ]);
-
-}}
+    }
+}
