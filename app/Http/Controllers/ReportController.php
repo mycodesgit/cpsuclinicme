@@ -36,8 +36,7 @@ class ReportController extends Controller
     } 
     public function peheReport($id)
     {
-        $patients = Patients::leftjoin('coasv2_db_schedule.college', 'patients.studCollege', '=', 'coasv2_db_schedule.college.college_abbr')
-        ->where('patients.id', $id)
+        $patients = Patients::where('patients.id', $id)
         ->select('patients.*', 'patients.created_at as createdas')
         ->first();
 
