@@ -37,90 +37,7 @@ class PatientController extends Controller
         //$offices = Office::all();
         return view('patient.patient_add', compact('patients', 'regions', 'col', 'prog'));
     }
-
-    public function patientCreate(Request $request)
-    {
-        $request->validate([
-            'lname' => 'required',
-            'fname' => 'required',
-            'mname' => 'required',
-            'birthdate' => 'required',
-            'age' => 'required',
-            'sex' => 'required',
-            'category' => 'required',
-            'home_region' => 'required',
-            'home_province' => 'required',
-            'home_city' => 'required',
-            'home_brgy' => 'required',
-            'contact' => 'required',
-            'stud_nation' => 'required',
-            'stud_religion' => 'required',
-            'c_status' => 'required',
-            'studCollege' => 'nullable',
-            'studCourse' => 'nullable',
-            'office' => 'nullable',
-            'guardian' => 'required',
-            'guardian_occup' => 'required',
-            'guardian_contact' => 'required',
-            'guardian_region' => 'required',
-            'guardian_province' => 'required',
-            'guardian_city' => 'required',
-            'guardian_brgy' => 'required',
-            'height_cm' => 'required',
-            'height_ft' => 'required',
-            'weight_kg' => 'required',
-            'weight_lb' => 'required',
-            'bmi' => 'required',
-            'temp' => 'nullable',
-            'pr' => 'nullable',
-            'bp' => 'nullable',
-            'rr' => 'nullable',
-        ]);
     
-        Patients::create([
-            'campus' => Auth::guard('web')->user()->campus,
-            'lname' => $request->input('lname'),
-            'fname' => $request->input('fname'),
-            'mname' => $request->input('mname'),
-            'ext_name' => $request->input('ext_name'),
-            'birthdate' => $request->input('birthdate'),
-            'age' => $request->input('age'),
-            'sex' => $request->input('sex'),
-            'category' => $request->input('category'),
-            'home_region' => $request->input('home_region'),
-            'home_province' => $request->input('home_province'),
-            'home_city' => $request->input('home_city'),
-            'home_brgy' => $request->input('home_brgy'),
-            'contact' => $request->input('contact'),
-            'stud_nation' => $request->input('stud_nation'),
-            'stud_religion' => $request->input('stud_religion'),
-            'c_status' => $request->input('c_status'),
-            'studCollege' => $request->input('studCollege'),
-            'studCourse' => $request->input('studCourse'),
-            'office' => $request->input('office'),
-            'guardian' => $request->input('guardian'),
-            'guardian_occup' => $request->input('guardian_occup'),
-            'guardian_contact' => $request->input('guardian_contact'),
-            'guardian_region' => $request->input('guardian_region'),
-            'guardian_province' => $request->input('guardian_province'),
-            'guardian_city' => $request->input('guardian_city'),
-            'guardian_brgy' => $request->input('guardian_brgy'),
-            'height_cm' => $request->input('height_cm'),
-            'height_ft' => $request->input('height_ft'),
-            'weight_kg' => $request->input('weight_kg'),
-            'weight_lb' => $request->input('weight_lb'),
-            'bmi' => $request->input('bmi'),
-            'temp' => $request->input('temp'),
-            'pr' => $request->input('pr'),
-            'bp' => $request->input('bp'),
-            'rr' => $request->input('rr'),
-        ]);
-    
-        //return redirect()->back()->with('success', 'Added Successfully');
-        return redirect()->route('moreInfo', $patient->stid)
-                     ->with('success', 'Added Successfully');
-    }
-
     public function studentRead() 
     {
         $sy = ConfigureCurrent::select('id', 'schlyear')
@@ -221,17 +138,89 @@ class PatientController extends Controller
         if (is_null($id)) {
             return redirect()->back()->with('error', 'ID cannot be null.');
         }
-        return view('patient.patient_moreinfo', compact(
-                                                'patients', 
-                                                'regions', 
-                                                'hprovinces', 
-                                                'hcities', 
-                                                'hbarangays', 
-                                                'gbarangays', 
-                                                'gprovinces', 
-                                                'gcities', 
-                                                'gbarangays', 
-                                                'col'));
+        return view('patient.patient_moreinfo', compact('patients', 'regions', 'hprovinces', 'hcities', 'hbarangays', 'gbarangays', 'gprovinces', 'gcities', 'gbarangays', 'col'));
+    }
+
+    public function patientCreate(Request $request)
+    {
+        $request->validate([
+            'lname' => 'required',
+            'fname' => 'required',
+            'mname' => 'required',
+            'birthdate' => 'required',
+            'age' => 'required',
+            'sex' => 'required',
+            'category' => 'required',
+            'home_region' => 'required',
+            'home_province' => 'required',
+            'home_city' => 'required',
+            'home_brgy' => 'required',
+            'contact' => 'required',
+            'stud_nation' => 'required',
+            'stud_religion' => 'required',
+            'c_status' => 'required',
+            'studCollege' => 'nullable',
+            'studCourse' => 'nullable',
+            'office' => 'nullable',
+            'guardian' => 'required',
+            'guardian_occup' => 'required',
+            'guardian_contact' => 'required',
+            'guardian_region' => 'required',
+            'guardian_province' => 'required',
+            'guardian_city' => 'required',
+            'guardian_brgy' => 'required',
+            'height_cm' => 'required',
+            'height_ft' => 'required',
+            'weight_kg' => 'required',
+            'weight_lb' => 'required',
+            'bmi' => 'required',
+            'temp' => 'nullable',
+            'pr' => 'nullable',
+            'bp' => 'nullable',
+            'rr' => 'nullable',
+        ]);
+    
+        Patients::create([
+            'campus' => Auth::guard('web')->user()->campus,
+            'lname' => $request->input('lname'),
+            'fname' => $request->input('fname'),
+            'mname' => $request->input('mname'),
+            'ext_name' => $request->input('ext_name'),
+            'birthdate' => $request->input('birthdate'),
+            'age' => $request->input('age'),
+            'sex' => $request->input('sex'),
+            'category' => $request->input('category'),
+            'home_region' => $request->input('home_region'),
+            'home_province' => $request->input('home_province'),
+            'home_city' => $request->input('home_city'),
+            'home_brgy' => $request->input('home_brgy'),
+            'contact' => $request->input('contact'),
+            'stud_nation' => $request->input('stud_nation'),
+            'stud_religion' => $request->input('stud_religion'),
+            'c_status' => $request->input('c_status'),
+            'studCollege' => $request->input('studCollege'),
+            'studCourse' => $request->input('studCourse'),
+            'office' => $request->input('office'),
+            'guardian' => $request->input('guardian'),
+            'guardian_occup' => $request->input('guardian_occup'),
+            'guardian_contact' => $request->input('guardian_contact'),
+            'guardian_region' => $request->input('guardian_region'),
+            'guardian_province' => $request->input('guardian_province'),
+            'guardian_city' => $request->input('guardian_city'),
+            'guardian_brgy' => $request->input('guardian_brgy'),
+            'height_cm' => $request->input('height_cm'),
+            'height_ft' => $request->input('height_ft'),
+            'weight_kg' => $request->input('weight_kg'),
+            'weight_lb' => $request->input('weight_lb'),
+            'bmi' => $request->input('bmi'),
+            'temp' => $request->input('temp'),
+            'pr' => $request->input('pr'),
+            'bp' => $request->input('bp'),
+            'rr' => $request->input('rr'),
+        ]);
+    
+        //return redirect()->back()->with('success', 'Added Successfully');
+        return redirect()->route('moreInfo', $patient->stid)->with('success', 'Added Successfully');
     }
 
     public function getCollege(Request $request)
