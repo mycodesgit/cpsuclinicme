@@ -24,8 +24,8 @@ class DashboardController extends Controller
         $pguest = Patients::where('category', 3)->get();
 
         $remarks1 = Patients::where('pexam_remarks', 1)->where('category', '=', 'Student')->get();
-        $remarks2 = Patients::where('pexam_remarks', 2)->where('category', 1)->get();
-        $remarks3 = Patients::where('pexam_remarks', 3)->where('category', 1)->get();
+        $remarks2 = Patients::where('pexam_remarks', 2)->where('category', '=', 'Student')->get();
+        $remarks3 = Patients::where('pexam_remarks', 3)->where('category', '=', 'Student')->get();
      
           
         $complaintsCount = Patientvisit::select('chief_complaint')

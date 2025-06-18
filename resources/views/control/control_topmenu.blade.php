@@ -10,7 +10,7 @@
     </li>
     <li class="nav-item">
         <a href="{{ route('patientAdd') }}" class="nav-link {{ request()->is('patient/*') || request()->is('file*') ? 'active' : '' }}">
-           <i class="fas fa-user-injured"></i> PREE-HE
+           <i class="fas fa-user-injured"></i> Pre-Entrance Exam
         </a>
     </li>
     <li class="nav-item">
