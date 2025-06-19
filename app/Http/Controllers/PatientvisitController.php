@@ -1,21 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Patients;
-use App\Models\Medicine;
+
 use Illuminate\Http\Request;
-use App\Models\Patientvisit;
-use App\Models\File;
-use App\Models\Complaint;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use DB;
+use Carbon\Carbon;
+
+use App\Models\ClinicDB\Patients;
+use App\Models\ClinicDB\Medicine;
+
+use App\Models\ClinicDB\Patientvisit;
+use App\Models\ClinicDB\File;
+use App\Models\ClinicDB\Complaint;
+
  
 class PatientvisitController extends Controller
 {
     public function patientvisitList(Request $request){
-            $date = date('Y-m-d');
-            date_default_timezone_set('Asia/Manila');
-            return view('patientvisit.patientvisit_list', compact('date'));   
+        $date = date('Y-m-d');
+        date_default_timezone_set('Asia/Manila');
+        
+        return view('patientvisit.patientvisit_list', compact('date'));   
     }
 
     public function patientListOption(Request $request)
@@ -34,14 +42,14 @@ class PatientvisitController extends Controller
         ]);
     }
     
-    public function addPatient(Request $request){
-      
-            $patient = new Patientvisit();
-            $patient->stid = $request->input('stid');
-            $patient->date = $request->input('date');
-            $patient->time = $request->input('time');
-            
-            $patient->save();
+    public function addPatient(Request $request)
+    {
+        $patient = new Patientvisit();
+        $patient->stid = $request->input('stid');
+        $patient->date = $request->input('date');
+        $patient->time = $request->input('time');
+        
+        $patient->save();
 
     return redirect()->back()->with('success', 'Added Successfully');
     }

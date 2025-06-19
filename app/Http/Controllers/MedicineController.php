@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Models\Patientvisit;
-use App\Models\Medicine;
+use App\Models\ClinicDB\Patientvisit;
+use App\Models\ClinicDB\Medicine;
 use DB;
 
 class MedicineController extends Controller
