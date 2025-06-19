@@ -116,7 +116,7 @@ class PatientController extends Controller
     public function moreInfo($id)
     {
         
-        $patients = Patients::where('stid', $id)->first();
+        $patients = Patients::where('id', $id)->first();
         $regions = Region::all();
         $hprovinces = Province::where('region_id', $patients->home_region)->get();
         $hcities = City::where('city_id', $patients->home_city)->get();
@@ -180,7 +180,7 @@ class PatientController extends Controller
             'rr' => 'nullable',
         ]);
     
-        Patients::create([
+        $patient = Patients::create([
             'campus' => Auth::guard('web')->user()->campus,
             'lname' => $request->input('lname'),
             'fname' => $request->input('fname'),
@@ -220,7 +220,7 @@ class PatientController extends Controller
         ]);
     
         //return redirect()->back()->with('success', 'Added Successfully');
-        return redirect()->route('moreInfo', $patient->stid)->with('success', 'Added Successfully');
+        return redirect()->route('moreInfoupcoming', $patient->id)->with('success', 'Added Successfully');
     }
 
     public function getCollege(Request $request)
@@ -385,25 +385,11 @@ class PatientController extends Controller
         return response()->json(['success' => true]);
     }
     
-    
-    
-    
-    public function patientDelete($id){
-        $patient = Patients::find($id);
-        if ($patient) {
-            $patient->delete();
-    
-            return response()->json([
-                'status' => 200,
-                'uid' => $id,
-            ]);
-        }
-        
-        return response()->json([
-            'status' => 404,
-            'message' => 'Patient not found',
-        ]);
+    public function patientDelete($id) 
+    {
+        $fund = Patients::find($id);
+        $fund->delete();
+
+        return response()->json(['success'=> true, 'message'=>'Deleted Successfully',]);
     }
-
-
 }

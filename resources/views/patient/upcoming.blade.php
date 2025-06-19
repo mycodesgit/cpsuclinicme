@@ -51,5 +51,7 @@
     </div>
 </div>
     
-
+<script>
+    var patientDeleteRoute = "{{ route('patientDelete', ['id' => ':id']) }}";
+</script>
 @endsection
