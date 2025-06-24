@@ -24,7 +24,8 @@
 
                     <div class="form-group mt-2">
                         <div class="form-row">
-                            <div class="col-md-12">
+                            
+                            <div class="col-md-10">
                                 <label class="badge badge-secondary">List of Patients</label><br>
                                 <div style="display:flex">
                                     <select id="mySelect" name="id"
@@ -32,14 +33,20 @@
                                         onchange="visitSearch()" style="width:100%">
                                         <option value="">Select Patient</option>
                                     </select>
-                                    @if (isset($patientSearch))
-                                        <button type="button" class="btn btn-success btn-sm add-button ml-3"
-                                            data-toggle="modal" data-target="#addPatientModal">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    @endif
                                 </div>
+                            </div>
 
+                            <div class="col-md-2">
+                                @if (isset($patientSearch))
+                                    <label>&nbsp;</label><br>
+                                    <button type="button" class="btn btn-success btn-sm add-button"
+                                        data-toggle="modal" data-target="#addPatientModal">
+                                        <i class="fa fa-plus"></i> Add New Complaint
+                                    </button>
+                                @endif
+                            </div>
+                            
+                            <div class="col-md-12">
                                 @if (isset($patientSearch))
                                     <div class="patient-name mt-3">
                                         <strong

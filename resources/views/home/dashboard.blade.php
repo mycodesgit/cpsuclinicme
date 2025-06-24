@@ -92,7 +92,7 @@
         <div class="col-md-7 " >
             <div class="card" style="background-color: #d5d5d5;" >
                 <div class="card-header" >
-                    <h3 class="card-title">Patient Visit Monthly Report</h3>
+                    <h3 class="card-title">Patient Visit Monthly Report - {{ \Carbon\Carbon::now()->format('F d, Y') }}</h3>
                     <div class="card-tools" >
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
