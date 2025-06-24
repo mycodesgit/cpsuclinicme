@@ -145,6 +145,10 @@
 
     @if(request()->is('dashboard'))
         <script src="{{ asset('style/plugins/chart.js/Chart.min.js') }}"></script>
+        <script>
+            var collegeCounts = {!! json_encode($collegeCounts) !!};
+            var collegeAcronyms = {!! json_encode($collegeAcronyms) !!};
+        </script>
     @endif
     
     <script src="{{ asset('js/validation/patientValidation.js') }}"></script>
@@ -161,40 +165,38 @@
             })
         });
     </script>
-   
-  
 
-<script>
-    // Store session message in sessionStorage
-    @if(Session::has('success'))
-        sessionStorage.setItem('successMessage', "{{ session('success') }}");
-    @endif
+    <script>
+        // Store session message in sessionStorage
+        @if(Session::has('success'))
+            sessionStorage.setItem('successMessage', "{{ session('success') }}");
+        @endif
 
-    // Display the message if it's found in sessionStorage
-    $(document).ready(function() {
-        let message = sessionStorage.getItem('successMessage');
-        if (message) {
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "positionClass": "toast-bottom-right",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000"
-            };
-            toastr.success(message);
-            sessionStorage.removeItem('successMessage'); // Clear after showing
-        }
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#example2').DataTable({
-            "pageLength": 5,
-            "lengthMenu": [5, 10, 25, 50, 100] 
+        // Display the message if it's found in sessionStorage
+        $(document).ready(function() {
+            let message = sessionStorage.getItem('successMessage');
+            if (message) {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000"
+                };
+                toastr.success(message);
+                sessionStorage.removeItem('successMessage'); // Clear after showing
+            }
         });
-    });
-</script>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example2').DataTable({
+                "pageLength": 5,
+                "lengthMenu": [5, 10, 25, 50, 100] 
+            });
+        });
+    </script>
 
     <script>
         function calculateAge() {
@@ -314,214 +316,214 @@
 
     </script>
 
+    <script>
+    $(document).ready(function() {
+        $('.medicine-delete').on('click', function() {
+            var medicineId = $(this).data('id');
 
-<script>
-$(document).ready(function() {
-    $('.medicine-delete').on('click', function() {
-        var medicineId = $(this).data('id');
+            var row = $('#tr-' + medicineId);
 
-        var row = $('#tr-' + medicineId);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = '{{ route("medicineDelete", ":id") }}'.replace(':id', medicineId);
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                var url = '{{ route("medicineDelete", ":id") }}'.replace(':id', medicineId);
-
-                $.ajax({
-                    url: url,
-                    type: 'delete',
-                    success: function(response) {
-                        console.log("Server response:", response);
-                        if(response.status == 200) {
-                            row.fadeOut(500, function() {
-                                $(this).remove();
-                            });
-                            Swal.fire({
-                                title: 'Deleted!',
-                                text: 'The record has been deleted.',
-                                icon: 'success',
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                        } 
-                    }
-                });
-            }
+                    $.ajax({
+                        url: url,
+                        type: 'delete',
+                        success: function(response) {
+                            console.log("Server response:", response);
+                            if(response.status == 200) {
+                                row.fadeOut(500, function() {
+                                    $(this).remove();
+                                });
+                                Swal.fire({
+                                    title: 'Deleted!',
+                                    text: 'The record has been deleted.',
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            } 
+                        }
+                    });
+                }
+            });
         });
     });
-});
-</script>
+    </script>
 
-<script>
-$(document).ready(function() {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('.file-delete').on('click', function() {
+                var fileId = $(this).data('id');
+                var row = $('#tr-file-' + fileId);
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var url = '{{ route("deleteFile", ":id") }}'.replace(':id', fileId);
+
+                        $.ajax({
+                            url: url,
+                            type: 'DELETE',
+                            success: function(response) {
+                                console.log("Server response:", response);
+                                if(response.status === 200) {
+                                    // Fade out and remove the row
+                                    row.fadeOut(500, function() {
+                                        $(this).remove();
+                                    });
+                                    Swal.fire({
+                                        title: 'Deleted!',
+                                        text: 'The file has been deleted.',
+                                        icon: 'success',
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'Failed to delete the file. Please try again.',
+                                        icon: 'error'
+                                    });
+                                }
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Could not reach the server. Please check your connection and try again.',
+                                    icon: 'error'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.complaint-delete').on('click', function() {
+                var complaintId = $(this).data('id');
+                var row = $('#tr-' + complaintId);
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var url = '{{ route("complaintDelete", ":id") }}'.replace(':id', complaintId);
+
+                        $.ajax({
+                            url: url,
+                            type: 'DELETE',
+                            success: function(response) {
+                                console.log("Server response:", response);
+                                if(response.status === 200) {
+                                    // Fade out and remove the row from the interface
+                                    row.fadeOut(500, function() {
+                                        $(this).remove();
+                                    });
+                                    Swal.fire({
+                                        title: 'Deleted!',
+                                        text: 'The record has been deleted.',
+                                        icon: 'success',
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'Failed to delete the record. Please try again.',
+                                        icon: 'error'
+                                    });
+                                }
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Could not reach the server. Please check your connection and try again.',
+                                    icon: 'error'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '{{ asset('transac/transaction1.css') }}'; 
+        document.head.appendChild(link);
+    </script>
+
+    <script>
+        function add() {
+            const addpatient = document.getElementById('addpatientId');
+
+            
+            if (addpatient.style.display === 'none' || addpatient.style.display === '') {
+                addpatient.style.display = 'block'; 
+            } else {
+                addpatient.style.display = 'none'; 
+            }
         }
-    });
-    $('.file-delete').on('click', function() {
-        var fileId = $(this).data('id');
-        var row = $('#tr-file-' + fileId);
+    </script>
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                var url = '{{ route("deleteFile", ":id") }}'.replace(':id', fileId);
+    <script>
+        function closeDiv() {
+            document.getElementById("addpatientId").style.display = "none";
+        }
+    </script>
 
-                $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    success: function(response) {
-                        console.log("Server response:", response);
-                        if(response.status === 200) {
-                            // Fade out and remove the row
-                            row.fadeOut(500, function() {
-                                $(this).remove();
-                            });
-                            Swal.fire({
-                                title: 'Deleted!',
-                                text: 'The file has been deleted.',
-                                icon: 'success',
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Failed to delete the file. Please try again.',
-                                icon: 'error'
-                            });
-                        }
-                    },
-                    error: function() {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Could not reach the server. Please check your connection and try again.',
-                            icon: 'error'
-                        });
-                    }
-                });
-            }
-        });
-    });
-});
-</script>
-
-<script>
-$(document).ready(function() {
-    $('.complaint-delete').on('click', function() {
-        var complaintId = $(this).data('id');
-        var row = $('#tr-' + complaintId);
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                var url = '{{ route("complaintDelete", ":id") }}'.replace(':id', complaintId);
-
-                $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    success: function(response) {
-                        console.log("Server response:", response);
-                        if(response.status === 200) {
-                            // Fade out and remove the row from the interface
-                            row.fadeOut(500, function() {
-                                $(this).remove();
-                            });
-                            Swal.fire({
-                                title: 'Deleted!',
-                                text: 'The record has been deleted.',
-                                icon: 'success',
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Failed to delete the record. Please try again.',
-                                icon: 'error'
-                            });
-                        }
-                    },
-                    error: function() {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Could not reach the server. Please check your connection and try again.',
-                            icon: 'error'
-                        });
-                    }
-                });
-            }
-        });
-    });
-});
-
-</script>
-<script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = '{{ asset('transac/transaction1.css') }}'; 
-    document.head.appendChild(link);
-</script>
-
-<script>
-function add() {
-    const addpatient = document.getElementById('addpatientId');
-
-    
-    if (addpatient.style.display === 'none' || addpatient.style.display === '') {
-        addpatient.style.display = 'block'; 
-    } else {
-        addpatient.style.display = 'none'; 
-    }
-}
-</script>
-<script>
-    function closeDiv() {
-        document.getElementById("addpatientId").style.display = "none";
-    }
-</script>
-
-@if(request()->routeIs('studentShow', 'moreInfo'))
-    @include('script.patientListScipt')
-@endif
-@if(request()->routeIs('studentUpcomingRead'))
-    @include('script.upcomingListScipt')
-@endif
-@if(request()->routeIs('moreInfo'))
-    @include('script.patientScript')
-@endif
-@if(request()->routeIs('patientvisitList'))
-    @include('script.patientVisitScript')
-@endif
-@if(request()->is('patient/add') || request()->is('patient/moreinfo/*'))
-    @include('script.patientScript')
-@endif
-@if(request()->is('dashboard'))
-    @include('script.dashboardScript')
-@endif
+    @if(request()->routeIs('studentShow', 'moreInfo'))
+        @include('script.patientListScipt')
+    @endif
+    @if(request()->routeIs('studentUpcomingRead'))
+        @include('script.upcomingListScipt')
+    @endif
+    @if(request()->routeIs('moreInfo'))
+        @include('script.patientScript')
+    @endif
+    @if(request()->routeIs('patientvisitList'))
+        @include('script.patientVisitScript')
+    @endif
+    @if(request()->is('patient/add') || request()->is('patient/moreinfo/*'))
+        @include('script.patientScript')
+    @endif
+    @if(request()->is('dashboard'))
+        @include('script.dashboardScript')
+    @endif
 
     @if(request()->routeIs('userRead'))
         <script src="{{ asset('js/ajax/userSerialize.js') }}"></script>
