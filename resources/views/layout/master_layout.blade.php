@@ -40,6 +40,20 @@
             background-color: #358359 !important;
             border: #358359 !important;
         }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #358359 !important;
+            border-color: #358359 !important;
+            color: #fff !important;
+            padding: 0 10px;
+            margin-top: .31rem;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: #fff !important;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: bold;
+            margin-right: 2px;
+        }
     </style>
 </head>
 
@@ -96,11 +110,9 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
                 CPSU Clinic Management System
             </div>
-            <!-- Default to the left -->
             <strong>Maintain and Manage by <a href="#">MIS</a>.</strong> All rights reserved.
         </footer>
     </div>
@@ -140,31 +152,8 @@
     <script src="{{ asset('style/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <!-- Select2 -->
     <script src="{{ asset('style/plugins/select2/js/select2.full.min.js') }}"></script>
-
     <script src="{{ asset('js/basic/table.js') }}"></script>
-
-    @if(request()->is('dashboard'))
-        <script src="{{ asset('style/plugins/chart.js/Chart.min.js') }}"></script>
-        <script>
-            var collegeCounts = {!! json_encode($collegeCounts) !!};
-            var collegeAcronyms = {!! json_encode($collegeAcronyms) !!};
-        </script>
-    @endif
-    
     <script src="{{ asset('js/validation/patientValidation.js') }}"></script>
-
-    
-    <script>
-        $(function () {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-            theme: 'bootstrap4'
-            })
-        });
-    </script>
 
     <script>
         // Store session message in sessionStorage
@@ -184,7 +173,7 @@
                     "extendedTimeOut": "1000"
                 };
                 toastr.success(message);
-                sessionStorage.removeItem('successMessage'); // Clear after showing
+                sessionStorage.removeItem('successMessage');
             }
         });
     </script>
@@ -198,329 +187,38 @@
         });
     </script>
 
-    <script>
-        function calculateAge() {
-            var birthday = document.getElementById('bday').value;
-            var today = new Date();
-            var birthDate = new Date(birthday);
-            var age = today.getFullYear() - birthDate.getFullYear();
-
-            if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-            document.getElementById('age').value = age;
-        }
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.update-field').on('change', function() {
-                var elementType = $(this).prop('tagName').toLowerCase();
-                if (elementType === 'input' || elementType === 'textarea') {
-                    columnid = $(this).data('column-id');
-                    columnname = $(this).data('column-name');
-                } else if (elementType === 'select') {
-                    columnid = $(this).find('option:selected').data('column-id');
-                    columnname = $(this).find('option:selected').data('column-name');
-                }
-
-                var value = $(this).val();
-
-                $.ajax({
-                    url: '{{ route("patientUpdate") }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: columnid,
-                        column: columnname,
-                        value: value
-                    },
-                    success: function(response) {
-                        
-                    },
-                    error: function(xhr, status, error) {
-                        if (xhr.status === 422) {
-                            var errors = xhr.responseJSON.errors;
-                            console.error('Validation errors:', errors);
-                        } else {
-                            console.error('Error:', error);
-                        }
-                    }
-                });
-            });
-        });
-
-        $(document).ready(function() {
-            $('.update-field1').on('change', function() {
-            var columnId = $(this).data('column-id');
-            var columnName = $(this).data('column-name');
-            var value = $(this).val();
-            var dataArray = $(this).data('array'); // Add this line
-
-            $.ajax({
-                url: "{{ route('patientHistory') }}",
-                type: 'POST',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: columnId,
-                    column: columnName,
-                    value: value,
-                    data_array: dataArray // Add this line
-                },
-                success: function(response) {
-                    
-                }
-            });
-        });
-    });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('.student-report').change(function() {
-                var selectedId = $(this).val();
-                if (selectedId) {
-                    var url = '{{ route("reportsRead", ":id") }}';
-                    url = url.replace(':id', selectedId);
-                    window.location.href = url;
-                }
-            });
-        });
-    </script>
-
-    <script>
-        function updateCoursePreferences(studCollege) {
-        $.ajax({
-                url: '{{ route("getCourse") }}?studCollege=' + studCollege,
-                type: 'GET',
-                success: function(data) {
-                    updateCourseOptions('studCourse', data.course);
-                },
-                error: function() {
-                    console.error('Error fetching course');
-                }
-            });
-        }
-
-        function updateCourseOptions(selectName, options) {
-            const select = $('select[name=' + selectName + ']');
-            select.empty();
-            select.append('<option value="">Select Course</option>');
-            $.each(options, function(key, value) {
-                select.append('<option value="' + value.progAcronym + '">' + value.progAcronym + ' - ' + value.progName +'</option>');
-            });
-        }
-
-        $('#collegeSelect').change(function() {
-            const selectedCollege = $(this).val();
-            updateCoursePreferences(selectedCollege);
-        });
-
-    </script>
-
-    <script>
-    $(document).ready(function() {
-        $('.medicine-delete').on('click', function() {
-            var medicineId = $(this).data('id');
-
-            var row = $('#tr-' + medicineId);
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var url = '{{ route("medicineDelete", ":id") }}'.replace(':id', medicineId);
-
-                    $.ajax({
-                        url: url,
-                        type: 'delete',
-                        success: function(response) {
-                            console.log("Server response:", response);
-                            if(response.status == 200) {
-                                row.fadeOut(500, function() {
-                                    $(this).remove();
-                                });
-                                Swal.fire({
-                                    title: 'Deleted!',
-                                    text: 'The record has been deleted.',
-                                    icon: 'success',
-                                    timer: 2000,
-                                    showConfirmButton: false
-                                });
-                            } 
-                        }
-                    });
-                }
-            });
-        });
-    });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $('.file-delete').on('click', function() {
-                var fileId = $(this).data('id');
-                var row = $('#tr-file-' + fileId);
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var url = '{{ route("deleteFile", ":id") }}'.replace(':id', fileId);
-
-                        $.ajax({
-                            url: url,
-                            type: 'DELETE',
-                            success: function(response) {
-                                console.log("Server response:", response);
-                                if(response.status === 200) {
-                                    // Fade out and remove the row
-                                    row.fadeOut(500, function() {
-                                        $(this).remove();
-                                    });
-                                    Swal.fire({
-                                        title: 'Deleted!',
-                                        text: 'The file has been deleted.',
-                                        icon: 'success',
-                                        timer: 2000,
-                                        showConfirmButton: false
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        title: 'Error!',
-                                        text: 'Failed to delete the file. Please try again.',
-                                        icon: 'error'
-                                    });
-                                }
-                            },
-                            error: function() {
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Could not reach the server. Please check your connection and try again.',
-                                    icon: 'error'
-                                });
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('.complaint-delete').on('click', function() {
-                var complaintId = $(this).data('id');
-                var row = $('#tr-' + complaintId);
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var url = '{{ route("complaintDelete", ":id") }}'.replace(':id', complaintId);
-
-                        $.ajax({
-                            url: url,
-                            type: 'DELETE',
-                            success: function(response) {
-                                console.log("Server response:", response);
-                                if(response.status === 200) {
-                                    // Fade out and remove the row from the interface
-                                    row.fadeOut(500, function() {
-                                        $(this).remove();
-                                    });
-                                    Swal.fire({
-                                        title: 'Deleted!',
-                                        text: 'The record has been deleted.',
-                                        icon: 'success',
-                                        timer: 2000,
-                                        showConfirmButton: false
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        title: 'Error!',
-                                        text: 'Failed to delete the record. Please try again.',
-                                        icon: 'error'
-                                    });
-                                }
-                            },
-                            error: function() {
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Could not reach the server. Please check your connection and try again.',
-                                    icon: 'error'
-                                });
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-
-    <script>
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '{{ asset('transac/transaction1.css') }}'; 
-        document.head.appendChild(link);
-    </script>
-
-    <script>
-        function add() {
-            const addpatient = document.getElementById('addpatientId');
-
-            
-            if (addpatient.style.display === 'none' || addpatient.style.display === '') {
-                addpatient.style.display = 'block'; 
-            } else {
-                addpatient.style.display = 'none'; 
-            }
-        }
-    </script>
-
-    <script>
-        function closeDiv() {
-            document.getElementById("addpatientId").style.display = "none";
-        }
-    </script>
-
-    @if(request()->routeIs('studentShow', 'moreInfo'))
-        @include('script.patientListScipt')
+    @if(request()->is('dashboard'))
+        <script src="{{ asset('style/plugins/chart.js/Chart.min.js') }}"></script>
+        <script>
+            var collegeCounts = {!! json_encode($collegeCounts) !!};
+            var collegeAcronyms = {!! json_encode($collegeAcronyms) !!};
+        </script>
     @endif
+
+    @if(request()->routeIs('patientAdd'))
+        @include('script.addpatientScript')
+    @endif
+
     @if(request()->routeIs('studentUpcomingRead'))
         @include('script.upcomingListScipt')
     @endif
+
+    @if(request()->routeIs('moreInfoupcoming'))
+        @include('script.updatePatientScript')
+    @endif
+
     @if(request()->routeIs('moreInfo'))
         @include('script.patientScript')
     @endif
-    @if(request()->routeIs('patientvisitList'))
+
+    @if(request()->routeIs('consultPatientRead'))
         @include('script.patientVisitScript')
     @endif
+
     @if(request()->is('patient/add') || request()->is('patient/moreinfo/*'))
         @include('script.patientScript')
     @endif
+
     @if(request()->is('dashboard'))
         @include('script.dashboardScript')
     @endif

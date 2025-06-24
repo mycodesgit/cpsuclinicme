@@ -14,7 +14,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{  route('patientvisitList') }}" class="nav-link {{ request()->is('patient-visit*') ? 'active' : '' }}">
+        <a href="{{  route('consultPatientRead') }}" class="nav-link {{ request()->is('patient-visit*') ? 'active' : '' }}">
            <i class="fas fa-user-injured"></i> Patients Visit
         </a>
     </li>

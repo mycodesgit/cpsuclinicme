@@ -80,13 +80,13 @@ Route::group(['middleware'=>['login_auth']],function(){
     });
   
     Route::prefix('patient-visit')->group( function(){
-        Route::get('/list', [PatientvisitController::class, 'patientvisitList'])->name('patientvisitList');
+        Route::get('/view/consult', [PatientvisitController::class, 'consultPatientRead'])->name('consultPatientRead');
         Route::get('/patientListOption', [PatientvisitController::class, 'patientListOption'])->name('patientListOption');
-        Route::get('/list/{id}', [PatientvisitController::class, 'visitSearch'])->name('visitSearch');
+        Route::get('/list/{id}', [PatientvisitController::class, 'consultPatientVisitSearch'])->name('consultPatientVisitSearch');
+        Route::get('/transaction/{id}', [PatientvisitController::class, 'consultPatientVisitTransact'])->name('consultPatientVisitTransact');
         Route::post('/add', [PatientvisitController::class, 'addPatient'])->name('addPatient');
         Route::get('/students', [PatientvisitController::class, 'ListStudent'])->name('ListStudent');
         Route::post('/studentLogin', [PatientvisitController::class, 'studentLogin'])->name('studentLogin');
-        Route::get('/transaction/{id}', [PatientvisitController::class, 'patienttrans'])->name('transaction');
         Route::post('/addItem/{id}', [PatientvisitController::class, 'patientsAddItem'])->name('addItem');
         Route::get('/remove-item/{id}', [PatientvisitController::class, 'removeItem'])->name('removeItem');
         Route::get('/Settings/{id}', [PatientvisitController::class, 'Settings'])->name('Settings');

@@ -6,7 +6,12 @@
         <div class="col-md-2">
             <div class="card">
                 <div class="card-body">
-                    @include('patientvisit.side_menu_patientvisit')
+                    <div class="">
+                        <div class="page-header" style="border-bottom: 1px solid #04401f;">
+                            <h4>Menu</h4>
+                        </div>
+                        @include('control.side_menu_pvisit')
+                    </div>
                 </div>
             </div>
         </div>
@@ -14,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="page-header" style="border-bottom: 1px solid #04401f;">
-                        <h4>Patient Information</h4>
+                        <h4>Patient Visit Consulation</h4>
                     </div>
 
                     <div class="form-group mt-2">
@@ -34,6 +39,7 @@
                                         </button>
                                     @endif
                                 </div>
+
                                 @if (isset($patientSearch))
                                     <div class="patient-name mt-3">
                                         <strong
@@ -103,7 +109,7 @@
                                                                     </div>
 
                                                                     <a class="btn btn-info btn-sm btninfo1 ml-1"
-                                                                        href="{{ route('transaction', $data->id) }}"
+                                                                        href="{{ route('consultPatientVisitTransact', $data->id) }}"
                                                                         title="edit" style="border-radius: 0.25rem;">
                                                                         <i
                                                                             class="fas fa-exclamation-circle text-light fa-lg"></i>
@@ -175,5 +181,4 @@
             </div>
         </div>
     </div>
-
 @endsection

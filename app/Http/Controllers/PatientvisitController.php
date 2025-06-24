@@ -19,7 +19,8 @@ use App\Models\ClinicDB\Complaint;
  
 class PatientvisitController extends Controller
 {
-    public function patientvisitList(Request $request){
+    public function consultPatientRead(Request $request)
+    {
         $date = date('Y-m-d');
         date_default_timezone_set('Asia/Manila');
         
@@ -41,6 +42,52 @@ class PatientvisitController extends Controller
             ]
         ]);
     }
+
+    public function consultPatientVisitSearch(Request $request, $id)
+    {
+        $date = date('Y-m-d');
+        date_default_timezone_set('Asia/Manila');
+
+        $files = File::where('patient_id', $id)->get();  
+        $meddatas = Medicine::all();
+        $meddata = [];
+        $quantity=[];
+        foreach ($meddatas as $data) {
+            $meddata[$data->id] = $data->medicine;
+            $quantity=[$data->id] =$data->qty;
+        }
+
+        $patients = Patients::select('id', 'fname', 'lname', 'mname')->get();
+        $patientSearch = Patients::select('id', 'fname', 'lname', 'mname'   )->where('id', $id)->first();
+
+        $patientVisit = Patientvisit::where('stid', $id)->get();
+
+        return view('patientvisit.patientvisit_list', compact('patients','patientSearch','patientVisit', 'meddata','quantity','files','date'));
+    }
+
+    public function consultPatientVisitTransact($id)
+    {
+            $complaints =  Complaint::all();
+            $meddatas = Medicine::all();
+            $meddata = [];
+            $quantity = [];
+            
+            foreach ($meddatas as $data) {
+            $meddata[$data->id] = $data->medicine;
+            $quantity[$data->id] = $data->qty;
+            }
+            $patients = Patients::all();
+            $patientVisit = DB::table('patients')
+            ->join('patientvisits', 'patients.id', '=', 'patientvisits.stid') 
+            ->where('patientvisits.id', $id) 
+            ->select('patients.*', 'patientvisits.*') 
+            ->get();
+            $medicines = Medicine::all();
+            $stids = $patientVisit->pluck('stid'); 
+            $files = File::where('patient_id',  $stids )->get();
+            return view('patientvisit.patienttransaction', compact('patientVisit', 'medicines', 'meddata', 'files','complaints'));
+  
+    }  
     
     public function addPatient(Request $request)
     {
@@ -68,47 +115,8 @@ class PatientvisitController extends Controller
             
             return redirect()->back()->with('success', 'Added Successfully');
     }
-    public function visitSearch(Request $request, $id){
-            $date = date('Y-m-d');
-            date_default_timezone_set('Asia/Manila');
-
-            $files = File::where('patient_id', $id)->get();  
-            $meddatas = Medicine::all();
-            $meddata = [];
-            $quantity=[];
-            foreach ($meddatas as $data) {
-                $meddata[$data->id] = $data->medicine;
-                $quantity=[$data->id] =$data->qty;
-            }
-
-            $patients = Patients::select('id', 'fname', 'lname', 'mname')->get();
-            $patientSearch = Patients::select('id', 'fname', 'lname', 'mname'   )->where('id', $id)->first();
-
-            $patientVisit = Patientvisit::where('stid', $id)->get();
-            return view('patientvisit.patientvisit_list', compact('patients','patientSearch','patientVisit', 'meddata','quantity','files','date'));
-    }
-    public function patienttrans($id){
-            $complaints =  Complaint::all();
-            $meddatas = Medicine::all();
-            $meddata = [];
-            $quantity = [];
-            
-            foreach ($meddatas as $data) {
-            $meddata[$data->id] = $data->medicine;
-            $quantity[$data->id] = $data->qty;
-            }
-            $patients = Patients::all();
-            $patientVisit = DB::table('patients')
-            ->join('patientvisit', 'patients.id', '=', 'patientvisit.stid') 
-            ->where('patientvisit.id', $id) 
-            ->select('patients.*', 'patientvisit.*') 
-            ->get();
-            $medicines = Medicine::all();
-            $stids = $patientVisit->pluck('stid'); 
-            $files = File::where('patient_id',  $stids )->get();
-            return view('patientvisit.patienttransaction', compact('patientVisit', 'medicines', 'meddata', 'files','complaints'));
-  
-    }   
+    
+     
     public function patientsAddItem(Request $request){
       
         $patient = Patientvisit::findOrFail($request->id);

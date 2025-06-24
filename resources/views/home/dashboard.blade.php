@@ -99,10 +99,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body" >
-                    <div id="customLegend" style="position:absolute; overflow:auto; width:19%; height:240px;">
-                        <p id="content"></p>
-                    </div>
+                <div class="card-body">
                     <canvas id="currcollegevisitBarChart" style="height:250px; min-height:250px"></canvas>
                 </div>
             </div>
@@ -123,7 +120,26 @@
                     <canvas id="donutChartRemarks" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
             </div>
-        </div> 
+        </div>
+        
+        <div class="col-md-7">
+            <div class="card" style="background-color: #d5d5d5;" >
+                <div class="card-header" >
+                    <h3 class="card-title">Patient Visit Monthly Complaints</h3>
+                    <div class="card-tools" >
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" >
+                    <div id="customLegend" style="position:absolute; overflow:auto; width:19%; height:240px;">
+                        <p id="content"></p>
+                    </div>
+                    <canvas id="pieChart{{ isset($index) ? $index : 'default' }}" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
