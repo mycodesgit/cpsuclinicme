@@ -94,11 +94,47 @@
         var complaintsData = {!! json_encode($result) !!};
 
         if (!complaintsData || complaintsData.length === 0) {
-            document.getElementById('content').innerHTML = "Empty!";
+            var complaints = ['Empty'];
+            var counts = [1];
+            var colors = ['#000000'];
 
-            var canvas = $('#pieChart{{ isset($index) ? $index : 'default' }}');
-            canvas.css('height', '0px');
-            canvas.hide();
+            var canvasId = '#pieChart{{ isset($index) ? $index : 'default' }}';
+
+            var donutData = {
+            labels: complaints,
+            datasets: [{
+                data: counts,
+                backgroundColor: colors,
+                hoverBackgroundColor: colors
+            }]
+            };
+
+            var pieChartCanvas = $(canvasId).get(0).getContext('2d');
+
+            var pieOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            legend: {
+                display: false,
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+            };
+
+            var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: donutData,
+            options: pieOptions
+            });
+
+            var customLegendHtml = '<div class="legend-item" style="display: flex; align-items: center; margin-bottom: 5px;">' +
+            '<div class="legend-color-box" style="width: 20px; height: 20px; background-color: #000000; margin-right: 10px;"></div>' +
+            '<span class="legend-label">Empty</span>' +
+            '</div>';
+
+            $('#customLegend').html(customLegendHtml);
 
             return;
         }
