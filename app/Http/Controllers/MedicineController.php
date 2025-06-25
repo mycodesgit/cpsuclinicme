@@ -10,66 +10,77 @@ use DB;
 
 class MedicineController extends Controller
 {
-    public function  medicineRead(){
-  
-      
-
-        $datas = Medicine::all();
-        return view('medicine.medicine_list', ['datas'=>$datas]);
+    public function  medicineRead()
+    {
+        return view('medicine.medicine_list');
     }
-    public function medicineInsert(Request $request){
 
-        $request->validate([
-         'medicine' => 'required',
-         'qty' => 'required'
+    public function getmedicineRead() 
+    {
+        $data = Medicine::orderBy('id', 'ASC')->get();
 
-        ]);
-        
-        Medicine::create([
-          'medicine' => $request->input('medicine'),
-          'qty'=> $request->input('qty')
-
-        ]);
-      
-        return redirect()->back()->with('success', 'Added Successfully');
+        return response()->json(['data' => $data]);
     }
-    public function medicineDelete($id){
-        $medicine = Medicine::find($id);
-        if ($medicine) {
-            $medicine->delete();
-    
-            return response()->json([
-                'status' => 200,
-                'mid' => $id,
+
+    public function medicineCreate(Request $request) 
+    {
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'medicine' => 'required',
+                'qty' => 'required',
             ]);
-        }
-        
-        return response()->json([
-            'status' => 404,
-            'message' => 'Medicine not found',
-        ]);
-    }
-    public function medicineEditRead($id){
-        $medicine = Medicine::find($id);
-        $datas = Medicine::all();
-       
-     return view('medicine.medicine_list', compact('medicine','datas'));
-    }
-    public function medicineUpdate(Request $request){
 
+            $medicineName = $request->input('medicine'); 
+            $existingMedicine = Medicine::where('medicine', $medicineName)->first();
+
+            if ($existingMedicine) {
+                return response()->json(['error' => true, 'message' => 'Medicine already exists'], 404);
+            }
+
+            try {
+                Medicine::create([
+                    'medicine' => $request->input('medicine'),
+                    'qty'=> $request->input('qty')
+                ]);
+
+                return response()->json(['success' => true, 'message' => 'Medicine stored successfully'], 200);
+            } catch (\Exception $e) {
+                return response()->json(['error' => true, 'message' => 'Failed to store Medicine'], 404);
+            }
+        }
+    }
+
+    public function medicineUpdate(Request $request) 
+    {
         $request->validate([
             'medicine' => 'required',
-            'qty' => 'required'
+            'qty' => 'required',
         ]);
 
-        $medicine = Medicine::findOrFail($request->id);       
-        if ($request->has('medicine')) {
-            $medicine->medicine = $request->input('medicine');
+        try {
+            $medicineName = $request->input('medicine');
+            $existingMedicine = Medicine::where('medicine', $medicineName)->where('id', '!=', $request->input('id'))->first();
+
+            if ($existingMedicine) {
+                return response()->json(['error' => true, 'message' => 'Medicine already exists'], 404);
+            }
+
+            $medcne = Medicine::findOrFail($request->input('id'));
+            $medcne->update([
+                'medicine' => $request->input('medicine'),
+                'qty'=> $request->input('qty')
+        ]);
+            return response()->json(['success' => true, 'message' => 'Medicine update successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => 'Failed to Update Medicine'], 404);
         }
-        if ($request->has('qty')) {
-            $medicine->qty = $request->input('qty');
-        }
-          $medicine->save();
-        return redirect()->back()->with('success', 'Updated Successfully');
+    }
+
+    public function medicineDelete($id) 
+    {
+        $med = Medicine::find($id);
+        $med->delete();
+
+        return response()->json(['success'=> true, 'message'=>'Deleted Successfully',]);
     }
 }

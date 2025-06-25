@@ -10,8 +10,11 @@
                         <div class="page-header" style="border-bottom: 1px solid #04401f;">
                             <h4>Menu</h4>
                         </div>
-                        <form method="post" action="{{ isset($medicine) ? route('medicineUpdate', ['id' => $medicine->id]) : route('medicineInsert') }}">
-                        @csrf
+                        <form method="post" action="{{route('medicineCreate') }}" id="medicineForm">
+                            @if(isset($medicine))
+                                <input type="hidden" name="id" value="{{ $medicine->id }}">
+                            @endif
+                            @csrf
                             <div class="form-group mt-2">
                                 <div class="form-row">
                                     <div class="col-md-12">
@@ -32,29 +35,16 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
-                        <table id="example1" class="table table-hover">
+                        <table id="medlistab" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>medicine</th>
                                     <th>Quantity</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center" width="7%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($datas as $data)
-                                <tr id="tr-{{ $data->id }}">
-                                    <td>{{$data->medicine}}</td>
-                                    <td>{{ number_format($data->qty) }}</td>
-                                    <td class="text-center">
-                                        <a class="btn btn-danger btn-sm medicine-delete" data-id="{{ $data->id }}" title="delete">
-                                            <i class="fas fa-trash"></i> 
-                                        </a>   
-                                        <a class="btn btn-primary btn-sm" href="{{ route('medicineEditRead', $data->id) }}" title="edit">
-                                            <i class="fas fa-edit"></i> 
-                                        </a>     
-                                    </td>
-                                </tr>
-                            @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -62,6 +52,36 @@
             </div>
         </div>
     </div>
-</div>   
+</div>  
+
+<div class="modal fade" id="editMedicineModal" tabindex="-1" role="dialog" aria-labelledby="editMedicineModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMedicineModalLabel">Edit Medicine Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editMedicineForm">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="editMedicineId">
+                    <div class="form-group">
+                        <label for="editMedicineName">Medicine Name</label>
+                        <input type="text" class="form-control" id="editMedicineName" name="medicine">
+                    </div>
+                    <div class="form-group">
+                        <label for="editMedicineQty">Medicine Name</label>
+                        <input type="number" class="form-control" id="editMedicineQty" name="qty">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 

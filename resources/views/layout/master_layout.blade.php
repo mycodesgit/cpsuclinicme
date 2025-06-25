@@ -215,6 +215,10 @@
         @include('script.patientVisitScript')
     @endif
 
+    @if(request()->routeIs('medicineRead'))
+        @include('script.medicineScript')
+    @endif
+
     @if(request()->is('patient/add') || request()->is('patient/moreinfo/*'))
         @include('script.patientScript')
     @endif

@@ -73,10 +73,10 @@ Route::group(['middleware'=>['login_auth']],function(){
 
     Route::prefix('/medicine')->group(function(){
         Route::get('/list', [MedicineController::class, 'medicineRead'])->name('medicineRead');
-        Route::post('/medicineInsert', [MedicineController::class, 'medicineInsert'])->name('medicineInsert');
-        Route::delete('/medicineDelete/{id}', [MedicineController::class, 'medicineDelete'])->name('medicineDelete');
-        Route::get('/medicineEditRead/{id}', [MedicineController::class, 'medicineEditRead'])->name('medicineEditRead');
-        Route::post('/medicineUpdate/{id}', [MedicineController::class, 'medicineUpdate'])->name('medicineUpdate');
+        Route::get('/list/ajax', [MedicineController::class, 'getmedicineRead'])->name('getmedicineRead');
+        Route::post('/medicine/add', [MedicineController::class, 'medicineCreate'])->name('medicineCreate');
+        Route::post('/medicineUpdate', [MedicineController::class, 'medicineUpdate'])->name('medicineUpdate');
+        Route::post('/medicineDelete/{id}', [MedicineController::class, 'medicineDelete'])->name('medicineDelete');
     });
   
     Route::prefix('patient-visit')->group( function(){
