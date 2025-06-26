@@ -211,8 +211,12 @@
         @include('script.patientScript')
     @endif
 
-    @if(request()->routeIs('consultPatientRead', 'consultPatientVisitSearch'))
+    @if(request()->routeIs('consultPatientRead', 'consultPatientVisitSearch', 'patientReferRead', 'reportsSrch', 'reportsRead'))
         @include('script.patientVisitScript')
+    @endif
+
+    @if(request()->routeIs('referPatientVisitSearch'))
+        @include('script.patientVisitReferralScript')
     @endif
 
     @if(request()->routeIs('medicineRead'))

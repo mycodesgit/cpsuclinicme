@@ -13,6 +13,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\PatientvisitController;
+use App\Http\Controllers\PatientvisitReferralController;
 use App\Http\Controllers\MedicineController;
 
 /*
@@ -90,20 +91,20 @@ Route::group(['middleware'=>['login_auth']],function(){
         Route::post('/addItem/{id}', [PatientvisitController::class, 'patientsAddItem'])->name('addItem');
         Route::get('/remove-item/{id}', [PatientvisitController::class, 'removeItem'])->name('removeItem');
         Route::get('/Settings/{id}', [PatientvisitController::class, 'Settings'])->name('Settings');
-    });
 
-    Route::prefix('test-system')->group( function(){
-        Route::get('test', [PatientvisitController::class, 'test'])->name('test');
-        Route::get('test2', [PatientvisitController::class, 'test2'])->name('test2');
+        Route::get('/view/refer', [PatientvisitReferralController::class, 'patientReferRead'])->name('patientReferRead');
+        Route::get('/view/refer/list/{id}', [PatientvisitReferralController::class, 'referPatientVisitSearch'])->name('referPatientVisitSearch');
+        Route::post('/view/refer/list/add', [PatientvisitReferralController::class, 'referralCreate'])->name('referralCreate');
+        Route::get('/view/refer/list/viewlistajax/{id}', [PatientvisitReferralController::class, 'getreferralRead'])->name('getreferralRead');
+        Route::post('/view/refer/list/update', [PatientvisitReferralController::class, 'referralUpdate'])->name('referralUpdate');
+        Route::get('/view/referral/list/pdf', [PatientvisitReferralController::class, 'referralPDF'])->name('referralPDF');
     });
-    
-
 
     Route::prefix('/reports')->group(function (){
+        Route::get('/', [ReportController::class,'reportsSrch'])->name('reportsSrch');
+        Route::get('/view/{id}', [ReportController::class,'reportsRead'])->name('reportsRead');
         Route::get('/refused', [ReportController::class,'refusedReport'])->name('refusedReport');
         Route::get('/waiver', [ReportController::class,'waiverReport'])->name('waiverReport');
-        Route::get('/', [ReportController::class,'reportsSrch'])->name('reportsSrch');
-        Route::get('/{id}', [ReportController::class,'reportsRead'])->name('reportsRead');
         Route::get('/pehe-report/{id}', [ReportController::class,'peheReport'])->name('peheReport');
        
     });
@@ -118,8 +119,6 @@ Route::group(['middleware'=>['login_auth']],function(){
         Route::post('list/update/status', [UserController::class, 'userStatusUpdate'])->name('userStatusUpdate');
         Route::get('list/delete/{id}', [UserController::class, 'userDelete'])->name('userDelete');
     });
-
-    
 
     //Address
     Route::prefix('/address')->group(function() {

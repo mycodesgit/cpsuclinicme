@@ -30,7 +30,7 @@
                                 <div style="display:flex">
                                     <select id="mySelect" name="id"
                                         class="form-control mb-3 select2 form-control-sm update-field"
-                                        onchange="visitSearch()" style="width:100%">
+                                        onchange="visitSearch('mySelect', '{{ route('consultPatientVisitSearch', ':id') }}')" style="width:100%">
                                         <option value="">Select Patient</option>
                                     </select>
                                 </div>
@@ -50,7 +50,7 @@
                                 @if (isset($patientSearch))
                                     <div class="patient-name mt-3">
                                         <strong
-                                            style="text-transform: uppercase; color: #0c62bd; letter-spacing: 1px; font-size: 25px;">
+                                            style="text-transform: uppercase; color: #358359; letter-spacing: 1px; font-size: 25px;">
                                             NAME: {{ strtoupper($patientSearch->lname) }}
                                             {{ strtoupper($patientSearch->fname) }} {{ strtoupper($patientSearch->mname) }}
                                         </strong>

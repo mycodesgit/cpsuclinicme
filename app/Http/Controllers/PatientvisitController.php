@@ -29,7 +29,7 @@ class PatientvisitController extends Controller
 
     public function patientListOption(Request $request)
     {
-        $pageSize = 1000; // Records per batch
+        $pageSize = 1000;
         $page = $request->input('page', 1);
     
         $patients = Patients::select('id', 'fname', 'lname', 'mname')
@@ -67,25 +67,28 @@ class PatientvisitController extends Controller
 
     public function consultPatientVisitTransact($id)
     {
-            $complaints =  Complaint::all();
-            $meddatas = Medicine::all();
-            $meddata = [];
-            $quantity = [];
-            
-            foreach ($meddatas as $data) {
+        $complaints =  Complaint::all();
+        $meddatas = Medicine::all();
+        $meddata = [];
+        $quantity = [];
+        
+        foreach ($meddatas as $data) {
             $meddata[$data->id] = $data->medicine;
             $quantity[$data->id] = $data->qty;
-            }
-            $patients = Patients::all();
-            $patientVisit = DB::table('patients')
-            ->join('patientvisits', 'patients.id', '=', 'patientvisits.stid') 
-            ->where('patientvisits.id', $id) 
-            ->select('patients.*', 'patientvisits.*') 
-            ->get();
-            $medicines = Medicine::all();
-            $stids = $patientVisit->pluck('stid'); 
-            $files = File::where('patient_id',  $stids )->get();
-            return view('patientvisit.patienttransaction', compact('patientVisit', 'medicines', 'meddata', 'files','complaints'));
+        }
+        $patients = Patients::all();
+
+        $patientVisit = DB::table('patients')
+        ->join('patientvisits', 'patients.id', '=', 'patientvisits.stid') 
+        ->where('patientvisits.id', $id) 
+        ->select('patients.*', 'patientvisits.*') 
+        ->get();
+
+        $medicines = Medicine::all();
+        $stids = $patientVisit->pluck('stid'); 
+        $files = File::where('patient_id',  $stids )->get();
+
+        return view('patientvisit.patienttransaction', compact('patientVisit', 'medicines', 'meddata', 'files','complaints'));
   
     }  
     
@@ -98,27 +101,30 @@ class PatientvisitController extends Controller
         
         $patient->save();
 
-    return redirect()->back()->with('success', 'Added Successfully');
+        return redirect()->back()->with('success', 'Added Successfully');
     }
 
-    public function ListStudent(){   
-            $patients = Patients::with('patientvisits')->get();
-            return view('patientvisit.students_info', compact('patients'));
+    public function ListStudent()
+    {   
+        $patients = Patients::with('patientvisits')->get();
+        return view('patientvisit.students_info', compact('patients'));
     }
-    public function studentLogin(Request $request){
-            $patient = new Patientvisit();
-            $patient->stid = $request->input('stid');
-            $patient->date = $request->input('date');
-            $patient->time = $request->input('time');
-            
-            $patient->save();
-            
-            return redirect()->back()->with('success', 'Added Successfully');
+
+    public function studentLogin(Request $request)
+    {
+        $patient = new Patientvisit();
+        $patient->stid = $request->input('stid');
+        $patient->date = $request->input('date');
+        $patient->time = $request->input('time');
+        
+        $patient->save();
+        
+        return redirect()->back()->with('success', 'Added Successfully');
     }
     
      
-    public function patientsAddItem(Request $request){
-      
+    public function patientsAddItem(Request $request)
+    {    
         $patient = Patientvisit::findOrFail($request->id);
 
         $patient->date = $request->input('date');
@@ -191,42 +197,8 @@ class PatientvisitController extends Controller
         
         $patient->save();
         
-            return redirect()->back()->with('success', 'Added Successfully');
+        return redirect()->back()->with('success', 'Added Successfully');
     } 
-
-    public function Settings(){
-        return view ('settings.info');
-    }
-
-    public function test(Request $request){
-            
-        $patientvisit = Patientvisit::pluck('medicine', 'qty');
-        $medicinesDetails = [];
-        $patientvisit->each(function ($medicine, $qty) use (&$medicinesDetails) {
-            $medicines = explode(',', $medicine);
-            $quantities = explode(',', $qty);
-    
-            foreach ($medicines as $index => $med) {
-                $medicine2 = Medicine::select('qty', 'id')->where('id', $med)->first();
-    
-                if ($medicine2) {
-                    
-                    $medicinesDetails[] = [
-                        'id' => $medicine2->id,
-                        'quantity' => $medicine2->qty - $quantities[$index]
-                    ];
-                }
-            }
-        });
-        
-        return view('test.test', compact('patientvisit', 'medicinesDetails'));
-    }
-
-    public function test2(Request $request){
-        $datas=Patients::all();
-        return view('test.test2', compact('datas'));
-    }
-    
 }
         
         

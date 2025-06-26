@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use PDF;
 
 use App\Models\ClinicDB\Patients;
+use App\Models\ClinicDB\Patientvisit;
+use App\Models\ClinicDB\File;
 use App\Models\ClinicDB\Course;
 use App\Models\ClinicDB\Office;
 
@@ -23,17 +26,23 @@ use App\Models\SettingDB\Region;
 use App\Models\SettingDB\Province;
 use App\Models\SettingDB\City;
 use App\Models\SettingDB\Barangay;
-use PDF;
+
 
 class ReportController extends Controller
 {
-    public function reportsSrch(){
-        
-        // $patients = Patients::all();
-        
-        $patients = Patients::limit(10)->get();
-        return view('reports.list', compact('patients'));
+    public function reportsSrch()
+    {
+        return view('reports.list');
     } 
+
+    public function reportsRead($id)
+    {
+        $files = File::where('patient_id', $id)->get();
+        $patientVisit = Patientvisit::where('stid', $id)->get();
+
+        return view('reports.list', compact('patientVisit', 'files', 'id'));
+    }
+
     public function peheReport($id)
     {
         $patients = Patients::where('patients.id', $id)
@@ -54,7 +63,8 @@ class ReportController extends Controller
         return $pdf->stream();
     }
 
-    public function waiverReport(){
+    public function waiverReport()
+    {
         $pdf = PDF::loadView('reports.waiver')
         ->setPaper([0, 0, 816, 1248], 'portrait'); 
         return $pdf->stream();
@@ -66,11 +76,6 @@ class ReportController extends Controller
         
     }
 
-    public function reportsRead($id){
-       // $patients = Patients::all();
-      
-        $patients = Patients::limit(10)->get();
-        return view('reports.list', compact('patients', 'id'));
-    }
+    
 
 }
