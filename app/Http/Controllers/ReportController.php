@@ -11,6 +11,7 @@ use PDF;
 
 use App\Models\ClinicDB\Patients;
 use App\Models\ClinicDB\Patientvisit;
+use App\Models\ClinicDB\PatientReferral;
 use App\Models\ClinicDB\File;
 use App\Models\ClinicDB\Course;
 use App\Models\ClinicDB\Office;
@@ -37,10 +38,11 @@ class ReportController extends Controller
 
     public function reportsRead($id)
     {
-        $files = File::where('patient_id', $id)->get();
         $patientVisit = Patientvisit::where('stid', $id)->get();
+        $files = File::where('patient_id', $id)->get();
+        $referral = PatientReferral::where('stid', $id)->get();
 
-        return view('reports.list', compact('patientVisit', 'files', 'id'));
+        return view('reports.list', compact('patientVisit', 'files',  'referral', 'id'));
     }
 
     public function peheReport($id)

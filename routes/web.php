@@ -97,7 +97,7 @@ Route::group(['middleware'=>['login_auth']],function(){
         Route::post('/view/refer/list/add', [PatientvisitReferralController::class, 'referralCreate'])->name('referralCreate');
         Route::get('/view/refer/list/viewlistajax/{id}', [PatientvisitReferralController::class, 'getreferralRead'])->name('getreferralRead');
         Route::post('/view/refer/list/update', [PatientvisitReferralController::class, 'referralUpdate'])->name('referralUpdate');
-        Route::get('/view/referral/list/pdf', [PatientvisitReferralController::class, 'referralPDF'])->name('referralPDF');
+        Route::get('/view/referral/list/pdf/{id}', [PatientvisitReferralController::class, 'referralPDF'])->name('referralPDF');
     });
 
     Route::prefix('/reports')->group(function (){

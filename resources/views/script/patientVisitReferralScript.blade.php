@@ -71,6 +71,8 @@
                                 '<a href="#" class="dropdown-item btn-referedit" data-id="' + row.id + '" data-preferfrom="' + row.preferfrom + '" data-preferto="' + row.preferto + '" data-reasonrefer="' + row.reasonrefer + '" data-tentdiagnose="' + row.tentdiagnose + '" data-treatmentmedgiven="' + row.treatmentmedgiven + '">' +
                                 '<i class="fas fa-pen"></i> Edit' +
                                 '</a>' +
+                                '<a href="#" class="dropdown-item btn-view-pdf" data-id="' + row.id + '">' +
+                                '<i class="fas fa-file-pdf"></i> View Referral</a>' +
                                 '<button type="button" value="' + data + '" class="dropdown-item med-delete">' +
                                 '<i class="fas fa-trash"></i> Delete' +
                                 '</button>' +
@@ -108,6 +110,20 @@
         $('#edittreatmentmedgiven').val(treatmentmedgiven);
         $('#editReferralModal').modal('show');
     });
+
+    $(document).on('click', '.btn-view-pdf', function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+
+        // Laravel generates the base URL with a placeholder
+        var baseUrl = @json(route('referralPDF', ['id' => 'PLACEHOLDER_ID']));
+        var pdfUrl = baseUrl.replace('PLACEHOLDER_ID', id);
+
+        $('#pdfIframe').attr('src', pdfUrl);
+        $('#pdfModal').modal('show');
+    });
+
+
 
     $('#editReferralForm').submit(function(event) {
         event.preventDefault();

@@ -8,14 +8,32 @@
 
     <style>
         .details {			
-			margin-left: 20px;
+			margin-left: 10px;
 			text-align: left;
-			font-size: 11pt;
+			font-size: 10pt;
 		}
         .details-sm {			
-			margin-left: 20px;
+			margin-left: 10px;
 			text-align: left;
 			font-size: 9pt;
+		}
+        .comment-lines hr {
+	        border: none;
+	        margin-top: 20px !important;
+	        border-top: 1px solid #000;
+	        margin: 10px 0;
+	        width: 100%;
+	    }
+
+	    .comment-lines {
+		    margin-top: 5px;
+		}
+
+		.line {
+		    border-bottom: 1px solid black;
+		    height: 20px; /* Adjust the height to match the lines in your image */
+		    line-height: 20px;
+		    padding-left: 5px;
 		}
     </style>
 </head>
@@ -29,91 +47,307 @@
     <div>
         <div class="details" style="margin-top: 30px; margin-left: 533px;">
             <span style="display: inline-block; width: 1px; vertical-align: top;">&nbsp;</span>
-            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 150px;">
-                <span style="font-weight: bold; text-transform: uppercase;">sdsd</span>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 160px;">
+                <span style="font-weight: bold; text-transform: normal;">
+                    {{ \Carbon\Carbon::parse($pref->first()->date)->format('F d, Y') }}
+                </span>
             </div>
-            <div style="text-align: center; width: 200px; margin-left: 0px;">
+            <div style="text-align: center; width: 200px; margin-left: 0px; font-family: DejaVu Sans,">
                 <span>Date</span>
             </div>
         </div>
 
-        <div class="details" style="margin-top: 20px; margin-left: 20px;">
-            <span style="display: inline-block; width: 55px; vertical-align: top; font-weight:bold">Name:</span>
-            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 625px;">
-                <span style="text-transform: uppercase;">sdsd</span>
+        <div class="details" style="margin-top: 2px;">
+            <span style="display: inline-block; width: 55px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Name:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 645px;">
+                <span style="text-transform: capitalize;">{{ strtolower($pref->first()->patient_fname) }} {{ strtolower(substr($pref->first()->patient_mname, 0,1)) }}. {{ strtolower($pref->first()->patient_lname) }}</span>
             </div>
         </div>
 
-        <div class="details" style="margin-left: 20px;">
-            <span style="display: inline-block; width: 55px; vertical-align: top; font-weight:bold">Address:</span>
-            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 625px;">
-                <span style="text-transform: uppercase;">sdsd</span>
+        <div class="details" style="">
+            <span style="display: inline-block; width: 70px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Address:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 630px;">
+                <span style="text-transform: capitalize;">{{ strtolower($pref->first()->bname) }}, {{ strtolower($pref->first()->cname) }}, {{ strtolower($pref->first()->pname) }}, {{ $pref->first()->rname }}</span>
             </div>
         </div>
 
-        <div class="details" style="margin-left: 20px;">
-            <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold">Age:</span>
+        <div class="details" style="">
+            <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Age:</span>
             <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 50px;">
-                <span style="text-transform: uppercase;">sdsd</span>
+                <span style="text-transform: capitalize;">&nbsp;</span>
             </div>
-            <span style="display: inline-block; width: 88px; vertical-align: top; font-weight:bold; margin-left: 15px;">Date of Birth:</span>
-            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 130px;">
-                <span style="text-transform: uppercase;">sdsd</span>
+            <span style="display: inline-block; width: 120px; vertical-align: top; font-weight:bold; margin-left: 15px; font-family: DejaVu Sans,">Date of Birth:</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 120px;">
+                <span style="text-transform: capitalize;">{{ \Carbon\Carbon::parse($pref->first()->birthdate)->format('F d, Y') }}</span>
             </div>
-            <span style="display: inline-block; width: 88px; vertical-align: top; font-weight:bold; margin-left: 15px;">Civil Status:</span>
-            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 100px;">
-                <span style="text-transform: uppercase;">sdsd</span>
+            <span style="display: inline-block; width: 105px; vertical-align: top; font-weight:bold; margin-left: 15px; font-family: DejaVu Sans,">Civil Status:</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 90px;">
+                <span style="text-transform: capitalize;">{{ strtolower($pref->first()->c_status) }}</span>
             </div>
-            <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold; margin-left: 15px;">Sex:</span>
-            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 80px;">
-                <span style="text-transform: uppercase;">sdsd</span>
+            <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold; margin-left: 13px; font-family: DejaVu Sans,">Sex:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 85px;">
+                <span style="text-transform: capitalize;">{{ strtolower($pref->first()->sex) }}</span>
             </div>
         </div>
 
-        <div class="details" style="margin-left: 20px;">
-            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; width: 20px;">
-                <span style="text-transform: uppercase;">(    )</span>
+        <div class="details" style="margin-top: 5px;">
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; width: 20px; margin-top: -5px;">
+                <span style="font-family: DejaVu Sans, sans-serif; text-transform: uppercase;">
+                    ({{ $pref->first()->category == 'Student' ? '✔' : ' ' }})
+                </span>
             </div>
-            <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold">Student</span>
+            <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold; margin-left: 5px">Student</span>
 
-            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; width: 20px; margin-left: 35px;">
-                <span style="text-transform: uppercase;">(    )</span>
+            <div style="display: inline-block; margin-left: 35px; vertical-align: top; text-align: left; width: 20px; margin-top: -5px;">
+                <span style="font-family: DejaVu Sans, sans-serif; text-transform: uppercase;">
+                    ({{ $pref->first()->category == 'Employee' ? '✔' : ' ' }})
+                </span>
             </div>
             <span style="display: inline-block; width: 80px; vertical-align: top; font-weight:bold">Personnel</span>
 
             <span style="display: inline-block; width: 180px; vertical-align: top; font-weight:bold; margin-left: 15px;">Ocupation/Year & Section:</span>
-            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 290px;">
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 301px;">
                 <span style="text-transform: uppercase;">sdsd</span>
             </div>
         </div>
 
-        <div class="details" style="margin-left: 20px; margin-top: 20px;">
+        <div class="details" style="margin-top: 10px;">
             <span style="display: inline-block; width: 98px; vertical-align: top; font-weight:bold">Referred from:</span>
-            <div style="display: inline-block; vertical-align: top; text-align: left; width: 150px; margin-left: 35px;">
-                <span style="font-weight: bold;">( ) Medical Doctor</span>
+            <div style="display: inline-block; vertical-align: top; text-align: left; width: 150px; margin-left: 35px; margin-top: -5px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ({{ $pref->first()->preferfrom == 'Medical Doctor' ? '✔' : ' ' }})
+                    </span>
+                    Medical Doctor
+                </span>
             </div>
-            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 150px;">
-                <span style="font-weight: bold;">( ) School Nurse</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 150px; margin-top: -5px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ({{ $pref->first()->preferfrom == 'School Nurse' ? '✔' : ' ' }})
+                    </span>
+                    School Nurse
+                </span>
             </div>
-            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 170px;">
-                <span style="font-weight: bold;">( ) Dentist</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 170px; margin-top: -5px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ({{ $pref->first()->preferfrom == 'Dentist' ? '✔' : ' ' }})
+                    </span>
+                    Dentist
+                </span>
             </div>
         </div>
-        <div class="details" style="margin-left: 20px; margin-top: 0px;">
-            <span style="display: inline-block; width: 98px; vertical-align: top; font-weight:bold">Referred from:</span>
-            <div style="display: inline-block; vertical-align: top; text-align: left; width: 150px; margin-left: 35px;">
-                <span style="font-weight: bold;">( ) Medical Doctor</span>
+
+        <div class="details" style="margin-top: 2px;">
+            <span style="display: inline-block; width: 98px; vertical-align: top; font-weight:bold">Referred to:</span>
+            <div style="display: inline-block; vertical-align: top; text-align: left; width: 150px; margin-left: 35px; margin-top: -5px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ({{ $pref->first()->preferto == 'Medical Doctor' ? '✔' : ' ' }})
+                    </span>
+                    Medical Doctor
+                </span>
             </div>
-            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 150px;">
-                <span style="font-weight: bold;">( ) School Nurse</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 150px; margin-top: -5px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ({{ $pref->first()->preferto == 'CHO' ? '✔' : ' ' }})
+                    </span>
+                    CHO
+                </span>
             </div>
-            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 110px;">
-                <span style="font-weight: bold;">( ) Dentist</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 110px; margin-top: -5px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ({{ $pref->first()->preferto == 'Dentist' ? '✔' : ' ' }})
+                    </span>
+                    Dentist
+                </span>
             </div>
-            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 120px;">
-                <span style="font-weight: bold;">( ) Radiologist</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 120px; margin-top: -5px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ({{ $pref->first()->preferto == 'Radiologist' ? '✔' : ' ' }})
+                    </span>
+                    Radiologist
+                </span>
             </div>
         </div>
+
+        <div class="details" style="margin-top: 20px;">
+            <span style="display: inline-block; width: 50px; vertical-align: top; font-weight:bold">Weight:</span>
+            <div style="display: inline-block; margin-left: 2px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
+                <span style="text-transform: uppercase;">&nbsp;</span>
+            </div>
+            <span style="display: inline-block; width: 10px; vertical-align: top; font-weight:bold; margin-left: 6px;">T:</span>
+            <div style="display: inline-block; margin-left: 3px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
+                <span style="text-transform: uppercase;">&nbsp;</span>
+            </div>
+            <span style="display: inline-block; width: 15px; vertical-align: top; font-weight:bold; margin-left: 6px;">BP:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
+                <span style="text-transform: uppercase;">&nbsp;</span>
+            </div>
+            <span style="display: inline-block; width: 15px; vertical-align: top; font-weight:bold; margin-left: 6px;">HR:</span>
+            <div style="display: inline-block; margin-left: 10px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
+                <span style="text-transform: uppercase;">&nbsp;</span>
+            </div>
+            <span style="display: inline-block; width: 20px; vertical-align: top; font-weight:bold; margin-left: 6px;">SPO2:</span>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
+                <span style="text-transform: uppercase;">&nbsp;</span>
+            </div>%
+            <span style="display: inline-block; width: 15px; vertical-align: top; font-weight:bold; margin-left: 6px;">PR:</span>
+            <div style="display: inline-block; margin-left: 10px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
+                <span style="text-transform: uppercase;">&nbsp;</span>
+            </div>
+            <span style="display: inline-block; width: 20px; vertical-align: top; font-weight:bold; margin-left: 6px;">LMP:</span>
+            <div style="display: inline-block; margin-left: 16px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
+                <span style="text-transform: uppercase;">&nbsp;</span>
+            </div>
+            <span style="display: inline-block; width: 20px; vertical-align: top; font-weight:bold; margin-left: 6px;">AOG:</span>
+            <div style="display: inline-block; margin-left: 13px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
+                <span style="text-transform: uppercase;">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 15px;">
+            <label style="font-weight: bold; font-family: DejaVu Sans">Reason for Referral:</label>
+            <div class="comment-lines">
+                @php
+		            $referreason = explode("\n", wordwrap($pref->first()->reasonrefer ?? '', 900, "\n", true));
+		        @endphp
+		        @for($i = 0; $i < 3; $i++)
+		            <div class="line">
+		                {{ isset($referreason[$i]) ? $referreason[$i] : '' }}
+		            </div>
+		        @endfor
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 15px;">
+            <label style="font-weight: bold; font-family: DejaVu Sans">Tentative Diagnosis:</label>
+            <div class="comment-lines">
+                @php
+		            $refertent = explode("\n", wordwrap($pref->first()->tentdiagnose ?? '', 900, "\n", true));
+		        @endphp
+		        @for($i = 0; $i < 3; $i++)
+		            <div class="line">
+		                {{ isset($refertent[$i]) ? $refertent[$i] : '' }}
+		            </div>
+		        @endfor
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 15px;">
+            <label style="font-weight: bold; font-family: DejaVu Sans">Treatment/Medications Given:</label>
+            <div class="comment-lines">
+                @php
+		            $refertreat = explode("\n", wordwrap($pref->first()->treatmentmedgiven ?? '', 900, "\n", true));
+		        @endphp
+		        @for($i = 0; $i < 3; $i++)
+		            <div class="line">
+		                {{ isset($refertreat[$i]) ? $refertreat[$i] : '' }}
+		            </div>
+		        @endfor
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 20px; margin-left: 320px;">
+            <span style="display: inline-block; width: 1px; vertical-align: top;">&nbsp;</span>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 360px;">
+                <span style="font-weight: bold; text-transform: normal;">
+                    &nbsp;
+                </span>
+            </div>
+            <div style="text-align: center; width: 320px; margin-left: 50px; font-family: DejaVu Sans,">
+                <span style="font-size: 9pt !important;">Name and Signature of Examining Physician/Nurse</span>
+            </div>
+        </div>
+
+        <div class="page-header" style="border-bottom: 2px solid #000000; margin-top: 20px"></div>
+
+        <div class="details" style="margin-top: -10px;">
+            <div style="text-align: center; font-family: Arial, sans-serif; font-size: 11pt;">
+                <h3>RETURN REFERRAL SLIP</h3>
+                <p style="margin-top: -15px; font-size: 8pt">(Please send back this from when accomplished)</p>
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 10px; margin-left: 533px;">
+            <span style="display: inline-block; width: 1px; vertical-align: top; font-family: DejaVu Sans">Date:</span>
+            <div style="display: inline-block; margin-left: 50px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 130px;">
+                <span style="font-weight: bold; text-transform: normal;">
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 5px;">
+            <span style="display: inline-block; width: 20px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">To:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 300px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+        <div class="details" style="">
+            <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">From:</span>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 275px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 10px;">
+            <span style="display: inline-block; width: 145px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Name of Patient:</span>
+            <div style="display: inline-block; margin-left: 2px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 555px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="details" style="">
+            <span style="display: inline-block; width: 70px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Gender:</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 120px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+            <span style="display: inline-block; width: 105px; vertical-align: top; font-weight:bold; margin-left: 15px; font-family: DejaVu Sans,">Civil Status:</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 90px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+            <span style="display: inline-block; width: 80px; vertical-align: top; font-weight:bold; margin-left: 13px; font-family: DejaVu Sans,">Occupation:</span>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 173px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="details" style="">
+            <span style="display: inline-block; width: 70px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Address:</span>
+            <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 630px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="details" style="">
+            <span style="display: inline-block; width: 75px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Diagnosis:</span>
+            <div style="display: inline-block; margin-left: 7px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 622px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+            <div style="display: inline-block; margin-left: 85px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 622px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 10px;">
+            <span style="display: inline-block; width: 120px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Date Received:</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 585px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="details" style="">
+            <span style="display: inline-block; width: 110px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Action Taken:</span>
+            <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 594px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
