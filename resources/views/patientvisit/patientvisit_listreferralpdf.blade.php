@@ -45,7 +45,7 @@
     </header>
 
     <div>
-        <div class="details" style="margin-top: 30px; margin-left: 533px;">
+        <div class="details" style="margin-top: 10px; margin-left: 533px;">
             <span style="display: inline-block; width: 1px; vertical-align: top;">&nbsp;</span>
             <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 160px;">
                 <span style="font-weight: bold; text-transform: normal;">
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="details" style="margin-top: 2px;">
+        <div class="details" style="margin-top: -5px;">
             <span style="display: inline-block; width: 55px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Name:</span>
             <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 645px;">
                 <span style="text-transform: capitalize;">{{ strtolower($pref->first()->patient_fname) }} {{ strtolower(substr($pref->first()->patient_mname, 0,1)) }}. {{ strtolower($pref->first()->patient_lname) }}</span>
@@ -175,7 +175,7 @@
             </div>
         </div>
 
-        <div class="details" style="margin-top: 20px;">
+        <div class="details" style="margin-top: 10px;">
             <span style="display: inline-block; width: 50px; vertical-align: top; font-weight:bold">Weight:</span>
             <div style="display: inline-block; margin-left: 2px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 44px;">
                 <span style="text-transform: uppercase;">&nbsp;</span>
@@ -210,7 +210,7 @@
             </div>
         </div>
 
-        <div class="details" style="margin-top: 15px;">
+        <div class="details" style="margin-top: 8px;">
             <label style="font-weight: bold; font-family: DejaVu Sans">Reason for Referral:</label>
             <div class="comment-lines">
                 @php
@@ -224,7 +224,7 @@
             </div>
         </div>
 
-        <div class="details" style="margin-top: 15px;">
+        <div class="details" style="margin-top: 8px;">
             <label style="font-weight: bold; font-family: DejaVu Sans">Tentative Diagnosis:</label>
             <div class="comment-lines">
                 @php
@@ -238,7 +238,7 @@
             </div>
         </div>
 
-        <div class="details" style="margin-top: 15px;">
+        <div class="details" style="margin-top: 8px;">
             <label style="font-weight: bold; font-family: DejaVu Sans">Treatment/Medications Given:</label>
             <div class="comment-lines">
                 @php
@@ -268,7 +268,7 @@
 
         <div class="details" style="margin-top: -10px;">
             <div style="text-align: center; font-family: Arial, sans-serif; font-size: 11pt;">
-                <h3>RETURN REFERRAL SLIP</h3>
+                <h4>RETURN REFERRAL SLIP</h4>
                 <p style="margin-top: -15px; font-size: 8pt">(Please send back this from when accomplished)</p>
             </div>
         </div>
@@ -282,7 +282,7 @@
             </div>
         </div>
 
-        <div class="details" style="margin-top: 5px;">
+        <div class="details" style="margin-top: -10px;">
             <span style="display: inline-block; width: 20px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">To:</span>
             <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 300px;">
                 <span style="text-transform: capitalize;">&nbsp;</span>
@@ -345,6 +345,78 @@
             <span style="display: inline-block; width: 110px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Action Taken:</span>
             <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 594px;">
                 <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+            <div style="display: inline-block; margin-left: 113px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 594px;">
+                <span style="text-transform: capitalize;">&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 5px;">
+            <span style="display: inline-block; width: 50px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans">Result:</span>
+            <div style="display: inline-block; vertical-align: top; text-align: left; width: 100px; margin-left: 0px; margin-top: 15px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ( )
+                    </span>
+                    Improved
+                </span>
+            </div>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 100px; margin-top: 15px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ( )
+                    </span>
+                    Unimproved
+                </span>
+            </div>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 100px; margin-top: 15px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ( )
+                    </span>
+                    Deceased
+                </span>
+            </div>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: left; width: 100px; margin-top: 15px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ( )
+                    </span>
+                    Confirmed
+                </span>
+            </div>
+        </div>
+        <div class="details" style="margin-top: 0px;">
+            <div style="display: inline-block; vertical-align: top; text-align: left; width: 650px; margin-left: 53px; margin-top: 0px !important">
+                <span style="font-weight: bold;">
+                    <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
+                        ( )
+                    </span>
+                    Others (Please specify): _____________________________________________________________________
+                </span>
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 15px;">
+            <label style="font-weight: bold; font-family: DejaVu Sans">Remarks:</label>
+            <div class="comment-lines">
+                @for($i = 0; $i < 2; $i++)
+                    <div class="line">
+                        &nbsp;
+                    </div>
+                @endfor
+            </div>
+        </div>
+
+        <div class="details" style="margin-top: 20px; margin-left: 320px;">
+            <span style="display: inline-block; width: 1px; vertical-align: top;">&nbsp;</span>
+            <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 360px;">
+                <span style="font-weight: bold; text-transform: normal;">
+                    &nbsp;
+                </span>
+            </div>
+            <div style="text-align: center; width: 320px; margin-left: 50px; font-family: DejaVu Sans,">
+                <span style="font-size: 9pt !important;">Name and Signature of Examining Medical Officer</span>
             </div>
         </div>
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('stid')->nullable();
             $table->date('date')->nullable();
-            $table->time('time')->nullable();
+            $table->string('time')->nullable();
             $table->string('preferfrom')->nullable();
             $table->string('preferto')->nullable();
             $table->text('reasonrefer')->nullable();
