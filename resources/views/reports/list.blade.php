@@ -58,7 +58,7 @@
                                                     @if (isset($patientVisit) && count($patientVisit) > 0)
                                                         @php $patient = $patientVisit[0]; @endphp
                                                         <li class="nav-item active">
-                                                            <a href="#" class="nav-link">
+                                                            <a href="{{ route('peheReport', $patient->stid) }}" target="_blank" class="nav-link">
                                                                 <i class="fas fa-file-pdf" style="color: #fc5e5e"></i> Pre-entrance health examination
                                                             </a>
                                                         </li>
