@@ -164,13 +164,19 @@
                                             <div class="card-body p-1">
                                                 <ul class="nav nav-pills flex-column">
                                                     @if (isset($referral))
-                                                        @foreach ($referral as $referralfile)
-                                                        <li class="nav-item">
-                                                            <a href="{{ route('referralPDF', $referralfile->id) }}" target="_blank" class="nav-link">
-                                                                <i class="fas fa-file" style="color: #358359"></i> Referral Record - {{ $referralfile->date }} {{ $referralfile->time }}
-                                                            </a>
-                                                        </li>
-                                                        @endforeach
+                                                        @forelse ($referral as $referralfile)
+                                                            <li class="nav-item">
+                                                                <a href="{{ route('referralPDF', $referralfile->id) }}" target="_blank" class="nav-link">
+                                                                    <i class="fas fa-file" style="color: #358359"></i> Referral Record - {{ $referralfile->date }} {{ $referralfile->time }}
+                                                                </a>
+                                                            </li>
+                                                        @empty
+                                                            <li class="nav-item">
+                                                                <a href="#" class="nav-link">
+                                                                    <i class="fas fa-times"></i> No Referral Record
+                                                                </a>
+                                                            </li> 
+                                                        @endforelse
                                                     @else
                                                         <li class="nav-item">
                                                             <a href="#" class="nav-link">
