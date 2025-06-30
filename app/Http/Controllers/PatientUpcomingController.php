@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -48,15 +49,26 @@ class PatientUpcomingController extends Controller
             ->whereMonth('patients.created_at', '>=', $currentMonth)
             ->select('patients.*')
             ->orderBy('patients.created_at', 'ASC')
-            ->get();
-    
+            ->get()
+            ->map(function ($patient) {
+                return [
+                    'id' => Crypt::encryptString($patient->id),
+                    'fname' => $patient->fname,
+                    'lname' => $patient->lname,
+                    'mname' => $patient->mname,
+                    'sex' => $patient->sex,
+                    'c_status' => $patient->c_status,
+                ];
+            });
+        
         return response()->json(['data' => $data]);
     }
 
     public function moreInfoupcoming($id)
     {
+        $decryptedId = Crypt::decryptString($id);
         
-        $patients = Patients::where('id', $id)->first();
+        $patients = Patients::where('id', $decryptedId)->first();
         $regions = Region::all();
         $hprovinces = Province::where('region_id', $patients->home_region)->get();
         $hcities = City::where('city_id', $patients->home_city)->get();

@@ -23,7 +23,11 @@ $(document).ready(function() {
             { 
                 data: null,
                 render: function(data, type, row) {
-                    return [row.lname, row.fname, row.mname].filter(Boolean).join(' ');
+                    // Format: Lastname, Firstname M.
+                    let lname = row.lname || '';
+                    let fname = row.fname || '';
+                    let mname = row.mname ? row.mname.charAt(0) + '.' : '';
+                    return `${lname}, ${fname} ${mname}`.trim();
                 }
             }, 
             { data: 'sex' },   
@@ -45,6 +49,7 @@ $(document).ready(function() {
             {
                 data: 'id',
                 render: function(data, type, row) {
+                    var encryptedId = row.encrypted_id;
                     var moreInfoUrl = "{{ route('moreInfoupcoming', [ 'id' => ':id' ]) }}".replace(':id', data);
                     var fileReadUrl = "{{ route('fileRead', [ 'id' => ':id' ]) }}".replace(':id', data);
                     var reportsReadUrl = "{{ route('reportsRead', ':id') }}".replace(':id', data);
