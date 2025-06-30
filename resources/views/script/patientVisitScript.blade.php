@@ -4,7 +4,6 @@
         const selectedValue = document.getElementById(selectId).value;
         if (selectedValue) {
             $('#' + selectId).prop('disabled', true);
-
             const url = routeNameTemplate.replace(':id', selectedValue);
 
             setTimeout(() => {
@@ -12,10 +11,6 @@
             }, 100);
         }
     }
-
-    // Example usage in HTML:
-    // <select id="mySelect" onchange="visitSearch('mySelect', '{{ route('consultPatientVisitSearch', ':id') }}')">
-    // <select id="mySelectrefer" onchange="visitSearch('mySelectrefer', '{{ route('referPatientVisitSearch', ':id') }}')">
 </script>
 
 <script>

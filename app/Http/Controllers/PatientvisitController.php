@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
 
 use App\Models\ClinicDB\Patients;
@@ -31,24 +32,36 @@ class PatientvisitController extends Controller
     {
         $pageSize = 1000;
         $page = $request->input('page', 1);
-    
+
         $patients = Patients::select('id', 'fname', 'lname', 'mname')
                             ->paginate($pageSize, ['*'], 'page', $page);
-    
+
+        // Encrypt IDs only
+        $encryptedItems = collect($patients->items())->map(function ($patient) {
+            return [
+                'id' => Crypt::encryptString($patient->id), 
+                'fname' => $patient->fname,
+                'lname' => $patient->lname,
+                'mname' => $patient->mname,
+            ];
+        });
+
         return response()->json([
-            'data' => $patients->items(),
+            'data' => $encryptedItems,
             'pagination' => [
-                'more' => $patients->hasMorePages()
-            ]
+                'more' => $patients->hasMorePages(),
+            ],
         ]);
     }
 
     public function consultPatientVisitSearch(Request $request, $id)
     {
+        $decryptedId = Crypt::decryptString($id);
+
         $date = date('Y-m-d');
         date_default_timezone_set('Asia/Manila');
 
-        $files = File::where('patient_id', $id)->get();  
+        $files = File::where('patient_id', $decryptedId)->get();  
         $meddatas = Medicine::all();
         $meddata = [];
         $quantity=[];
@@ -58,9 +71,9 @@ class PatientvisitController extends Controller
         }
 
         $patients = Patients::select('id', 'fname', 'lname', 'mname')->get();
-        $patientSearch = Patients::select('id', 'fname', 'lname', 'mname'   )->where('id', $id)->first();
+        $patientSearch = Patients::select('id', 'fname', 'lname', 'mname'   )->where('id', $decryptedId)->first();
 
-        $patientVisit = Patientvisit::where('stid', $id)->get();
+        $patientVisit = Patientvisit::where('stid', $decryptedId)->get();
 
         return view('patientvisit.patientvisit_list', compact('patients','patientSearch','patientVisit', 'meddata','quantity','files','date'));
     }
@@ -86,7 +99,7 @@ class PatientvisitController extends Controller
 
         $medicines = Medicine::all();
         $stids = $patientVisit->pluck('stid'); 
-        $files = File::where('patient_id',  $stids )->get();
+        $files = File::where('patient_id', $stids)->get();
 
         return view('patientvisit.patienttransaction', compact('patientVisit', 'medicines', 'meddata', 'files','complaints'));
   

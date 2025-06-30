@@ -32,11 +32,10 @@
                     <select id="mySelect" name="id" class="form-control mb-3 select2 form-control-sm student-report"
                         style="width:100%">
                         <option value="">Select Patient</option>
-
+                    
                     </select>
                     <br>
                     @if (isset($id))
-                        {{-- <iframe src="{{ route('peheReport', $id) }}" frameborder="0" height="1000" width="100%"></iframe> --}}
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="patient-name">

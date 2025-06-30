@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -40,14 +41,16 @@ class ReportController extends Controller
 
     public function reportsRead($id)
     {
-        $patientSearch = Patients::select('id', 'fname', 'lname', 'mname'   )->where('id', $id)->first();
+        $decryptedId = Crypt::decryptString($id);
+
+        $patientSearch = Patients::select('id', 'fname', 'lname', 'mname'   )->where('id', $decryptedId)->get();
         $patientVisit = Patientvisit::leftJoin('patients', 'patientvisits.stid', '=', 'patients.id')
                 ->select(
                     'patientvisits.*',
                     'patients.fname',
                     'patients.mname',
                     'patients.lname',)
-                ->where('stid', $id)
+                ->where('stid', $decryptedId)
                 ->get();
         $complaints = Complaint::all()->keyBy('id');
 
@@ -59,8 +62,8 @@ class ReportController extends Controller
             $quantity=[$data->id] =$data->qty;
         }
 
-        $files = File::where('patient_id', $id)->get();
-        $referral = PatientReferral::where('stid', $id)->get();
+        $files = File::where('patient_id', $decryptedId)->get();
+        $referral = PatientReferral::where('stid', $decryptedId)->get();
 
         return view('reports.list', compact('patientSearch', 'patientVisit', 'complaints', 'meddata','quantity', 'files',  'referral', 'id'));
     }
