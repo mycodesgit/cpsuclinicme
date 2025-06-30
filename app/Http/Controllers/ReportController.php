@@ -40,6 +40,7 @@ class ReportController extends Controller
 
     public function reportsRead($id)
     {
+        $patientSearch = Patients::select('id', 'fname', 'lname', 'mname'   )->where('id', $id)->first();
         $patientVisit = Patientvisit::leftJoin('patients', 'patientvisits.stid', '=', 'patients.id')
                 ->select(
                     'patientvisits.*',
@@ -61,7 +62,7 @@ class ReportController extends Controller
         $files = File::where('patient_id', $id)->get();
         $referral = PatientReferral::where('stid', $id)->get();
 
-        return view('reports.list', compact('patientVisit', 'complaints', 'meddata','quantity', 'files',  'referral', 'id'));
+        return view('reports.list', compact('patientSearch', 'patientVisit', 'complaints', 'meddata','quantity', 'files',  'referral', 'id'));
     }
 
     public function peheReport($id)
