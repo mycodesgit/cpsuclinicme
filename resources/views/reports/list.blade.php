@@ -41,8 +41,8 @@
                                 <div class="patient-name">
                                     <strong
                                         style="text-transform: uppercase; color: #358359; letter-spacing: 1px; font-size: 25px;">
-                                        NAME: {{ strtoupper($patientSearch->first()->lname ?? '') }}
-                                        {{ strtoupper($patientSearch->first()->fname ?? '') }} {{ strtoupper($patientSearch->first()->mname ?? '') }}
+                                        NAME: {{ strtoupper($patientSearch->first()->fname ?? '') }}
+                                        {{ substr(strtoupper($patientSearch->first()->mname ?? ''), 0,1) }} {{ strtoupper($patientSearch->first()->lname ?? '') }}
                                     </strong>
                                 </div>
                                 <table id="example2" class="table table-hover">

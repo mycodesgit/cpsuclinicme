@@ -32,7 +32,7 @@
                 success: function (response) {
                     const $selects = $('#mySelect, #mySelectrefer');
                     const options = response.data.map(patient =>
-                        `<option value="${patient.id}">${patient.fname} ${patient.lname} ${patient.mname}</option>`
+                        `<option value="${patient.id}">${patient.fname} ${patient.mname ? patient.mname.charAt(0) + '.' : ''} ${patient.lname}</option>`
                     ).join('');
                     
                     $selects.append(options);
