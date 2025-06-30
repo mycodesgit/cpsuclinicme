@@ -39,7 +39,68 @@
                         {{-- <iframe src="{{ route('peheReport', $id) }}" frameborder="0" height="1000" width="100%"></iframe> --}}
                         <div class="row">
                             <div class="col-md-8">
-
+                                <div class="patient-name">
+                                    <strong
+                                        style="text-transform: uppercase; color: #358359; letter-spacing: 1px; font-size: 25px;">
+                                        NAME: {{ strtoupper($patientVisit->first()->lname) }}
+                                        {{ strtoupper($patientVisit->first()->fname) }} {{ strtoupper($patientVisit->first()->mname) }}
+                                    </strong>
+                                </div>
+                                <table id="example2" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Medicine Quantity</th>
+                                            <th>Chief Complaint</th>
+                                            <th>Treatment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($patientVisit as $data)
+                                            @php
+                                                $medicineValues = explode(',', $data->medicine);
+                                                $quantities = explode(',', $data->qty);
+                                                $complaintIds = explode(',', $data->chief_complaint);
+                                            @endphp
+                                            <tr>
+                                                <td>{{ \Carbon\Carbon::parse($data->date)->format('F d, Y') }}</td>
+                                                <td>{{ $data->time }}</td>
+                                                <td>
+                                                    @foreach ($medicineValues as $index => $medicineId)
+                                                        @if (isset($meddata[$medicineId]) && isset($quantities[$index]))
+                                                            {{ $meddata[$medicineId] }} <i class="bi bi-dash"></i>
+                                                            {{ $quantities[$index] }}
+                                                            @if (!$loop->last)
+                                                                <br>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($complaintIds as $compId)
+                                                        @if (isset($complaints[$compId]))
+                                                            @php
+                                                                $bg = $complaints[$compId]->colorcode;
+                                                                $hex = ltrim($bg, '#');
+                                                                // Convert hex to RGB
+                                                                $r = hexdec(substr($hex, 0, 2));
+                                                                $g = hexdec(substr($hex, 2, 2));
+                                                                $b = hexdec(substr($hex, 4, 2));
+                                                                $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
+                                                                $textColor = $luminance > 0.5 ? '#222' : '#fff';
+                                                            @endphp
+                                                            <span class="badge" style="background-color: {{ $bg }}; color: {{ $textColor }}">
+                                                                {{ $complaints[$compId]->complaint }}
+                                                            </span>
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                                <td>{{ $data->treatment }}</td>
+                                        @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="col-md-4">
                                 <div id="accordion">

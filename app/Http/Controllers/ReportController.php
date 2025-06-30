@@ -12,6 +12,8 @@ use PDF;
 use App\Models\ClinicDB\Patients;
 use App\Models\ClinicDB\Patientvisit;
 use App\Models\ClinicDB\PatientReferral;
+use App\Models\ClinicDB\Complaint;
+use App\Models\ClinicDB\Medicine;
 use App\Models\ClinicDB\File;
 use App\Models\ClinicDB\Course;
 use App\Models\ClinicDB\Office;
@@ -38,11 +40,28 @@ class ReportController extends Controller
 
     public function reportsRead($id)
     {
-        $patientVisit = Patientvisit::where('stid', $id)->get();
+        $patientVisit = Patientvisit::leftJoin('patients', 'patientvisits.stid', '=', 'patients.id')
+                ->select(
+                    'patientvisits.*',
+                    'patients.fname',
+                    'patients.mname',
+                    'patients.lname',)
+                ->where('stid', $id)
+                ->get();
+        $complaints = Complaint::all()->keyBy('id');
+
+        $meddatas = Medicine::all();
+        $meddata = [];
+        $quantity=[];
+        foreach ($meddatas as $data) {
+            $meddata[$data->id] = $data->medicine;
+            $quantity=[$data->id] =$data->qty;
+        }
+
         $files = File::where('patient_id', $id)->get();
         $referral = PatientReferral::where('stid', $id)->get();
 
-        return view('reports.list', compact('patientVisit', 'files',  'referral', 'id'));
+        return view('reports.list', compact('patientVisit', 'complaints', 'meddata','quantity', 'files',  'referral', 'id'));
     }
 
     public function peheReport($id)
