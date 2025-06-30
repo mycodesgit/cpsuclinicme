@@ -123,6 +123,12 @@
                                                                 <i class="fas fa-file-pdf" style="color: #fc5e5e"></i> Pre-entrance health examination
                                                             </a>
                                                         </li>
+                                                    @else   
+                                                        <li class="nav-item">
+                                                            <a href="#" class="nav-link">
+                                                                <i class="fas fa-times"></i> No Attachment
+                                                            </a>
+                                                        </li>
                                                     @endif
 
                                                     @if (isset($files))
