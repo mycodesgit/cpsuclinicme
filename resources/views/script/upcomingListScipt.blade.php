@@ -42,7 +42,7 @@ $(document).ready(function() {
                     } else if (data == 3) {
                         return `<span class="badge badge-warning" data-toggle="tooltip" title="${row.pend_reason}">Pending</span>`;
                     } else {
-                        return '';
+                        return '<span class="badge badge-info">Forgot to Select Remarks</span>';
                     }
                 }
             },
