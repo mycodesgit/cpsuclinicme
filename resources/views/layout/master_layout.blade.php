@@ -221,7 +221,7 @@
         @include('script.patientScript')
     @endif
 
-    @if(request()->routeIs('consultPatientRead', 'consultPatientVisitSearch', 'patientReferRead', 'reportsSrch', 'reportsRead'))
+    @if(request()->routeIs('consultPatientRead', 'consultPatientVisitSearch', 'patientReferRead', 'referPatientVisitSearch', 'reportsSrch', 'reportsRead'))
         @include('script.patientVisitScript')
     @endif
 

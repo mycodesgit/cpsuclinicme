@@ -51,8 +51,8 @@
                                     <div class="patient-name mt-3">
                                         <strong
                                             style="text-transform: uppercase; color: #358359; letter-spacing: 1px; font-size: 25px;">
-                                            NAME: {{ strtoupper($patientSearch->lname) }}
-                                            {{ strtoupper($patientSearch->fname) }} {{ strtoupper($patientSearch->mname) }}
+                                            NAME: {{ strtoupper($patientSearch->fname) }}
+                                            {{ substr(strtoupper($patientSearch->mname), 0,1) }}. {{ strtoupper($patientSearch->lname) }}
                                         </strong>
                                     </div>
                                     <div class="mt-3">
