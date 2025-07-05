@@ -23,7 +23,7 @@
                 'Fit for enrollment',
                 'Not fit for enrollment',
                 'Pending',
-                'Forgot to Select Remarks',
+                'NO Remarks',
             ],
             datasets: [{
                 data: [{{ count($remarks1) }}, {{ count($remarks2) }}, {{ count($remarks3) }}, {{ count($remarks4) }}],
