@@ -60,14 +60,14 @@
         <div class="details" style="margin-top: -5px;">
             <span style="display: inline-block; width: 55px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Name:</span>
             <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 645px;">
-                <span style="text-transform: capitalize;">{{ strtolower($pref->first()->patient_fname) }} {{ strtolower(substr($pref->first()->patient_mname, 0,1)) }}. {{ strtolower($pref->first()->patient_lname) }}</span>
+                <span style="text-transform: capitalize;">{{ strtolower($pref->patient_fname) }} {{ strtolower(substr($pref->patient_mname, 0,1)) }}. {{ strtolower($pref->patient_lname) }}</span>
             </div>
         </div>
 
         <div class="details" style="">
             <span style="display: inline-block; width: 70px; vertical-align: top; font-weight:bold; font-family: DejaVu Sans,">Address:</span>
             <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 630px;">
-                <span style="text-transform: capitalize;">{{ strtolower($pref->first()->bname) }}, {{ strtolower($pref->first()->cname) }}, {{ strtolower($pref->first()->pname) }}, {{ $pref->first()->rname }}</span>
+                <span style="text-transform: capitalize;">{{ strtolower($pref->bname) }}, {{ strtolower($pref->cname) }}, {{ strtolower($pref->pname) }}, {{ $pref->rname }}</span>
             </div>
         </div>
 
@@ -78,15 +78,15 @@
             </div>
             <span style="display: inline-block; width: 120px; vertical-align: top; font-weight:bold; margin-left: 15px; font-family: DejaVu Sans,">Date of Birth:</span>
             <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 120px;">
-                <span style="text-transform: capitalize;">{{ \Carbon\Carbon::parse($pref->first()->birthdate)->format('F d, Y') }}</span>
+                <span style="text-transform: capitalize;">{{ \Carbon\Carbon::parse($pref->birthdate)->format('F d, Y') }}</span>
             </div>
             <span style="display: inline-block; width: 105px; vertical-align: top; font-weight:bold; margin-left: 15px; font-family: DejaVu Sans,">Civil Status:</span>
             <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 90px;">
-                <span style="text-transform: capitalize;">{{ strtolower($pref->first()->c_status) }}</span>
+                <span style="text-transform: capitalize;">{{ strtolower($pref->c_status) }}</span>
             </div>
             <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold; margin-left: 13px; font-family: DejaVu Sans,">Sex:</span>
             <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; border-bottom: 1px solid black; width: 85px;">
-                <span style="text-transform: capitalize;">{{ strtolower($pref->first()->sex) }}</span>
+                <span style="text-transform: capitalize;">{{ strtolower($pref->sex) }}</span>
             </div>
         </div>
 
