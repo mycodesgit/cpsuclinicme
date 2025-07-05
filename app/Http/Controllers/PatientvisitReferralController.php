@@ -125,10 +125,10 @@ class PatientvisitReferralController extends Controller
 
     public function referralPDF($id)
     {   
-        $barangays = DB::connection('settings')->table('barangays');
-        $cities = DB::connection('settings')->table('cities');
-        $provinces = DB::connection('settings')->table('provinces');
-        $regions = DB::connection('settings')->table('regions');
+        $barangays = DB::connection('settings')->table('barangays')->select('*');
+        $cities = DB::connection('settings')->table('cities')->select('*');
+        $provinces = DB::connection('settings')->table('provinces')->select('*');
+        $regions = DB::connection('settings')->table('regions')->select('*');
 
         $pref = PatientReferral::join('patients', 'patientreferral.stid', '=', 'patients.id')
                 ->leftJoinSub($barangays, 'barangays', function ($join) {
