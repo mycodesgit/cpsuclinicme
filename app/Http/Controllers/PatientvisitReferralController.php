@@ -123,138 +123,60 @@ class PatientvisitReferralController extends Controller
         }
     }
 
-    // public function referralPDF($id)
-    // {   
-    //     $barangays = DB::connection('settings')->table('barangays')->select('*');
-    //     $cities = DB::connection('settings')->table('cities')->select('*');
-    //     $provinces = DB::connection('settings')->table('provinces')->select('*');
-    //     $regions = DB::connection('settings')->table('regions')->select('*');
+    public function referralPDF($id)
+    {   
+        $barangays = DB::connection('settings')->table('barangays')->select('*');
+        $cities = DB::connection('settings')->table('cities')->select('*');
+        $provinces = DB::connection('settings')->table('provinces')->select('*');
+        $regions = DB::connection('settings')->table('regions')->select('*');
 
-    //     $pref = PatientReferral::join('patients', 'patientreferral.stid', '=', 'patients.id')
-    //             ->leftJoinSub($barangays, 'barangays', function ($join) {
-    //                 $join->on('patients.home_brgy', '=', 'barangays.id');
-    //             })
+        $pref = PatientReferral::join('patients', 'patientreferral.stid', '=', 'patients.id')
+                ->leftJoinSub($barangays, 'barangays', function ($join) {
+                    $join->on('patients.home_brgy', '=', 'barangays.id');
+                })
 
-    //             ->leftJoinSub($cities, 'cities', function ($join) {
-    //                 $join->on('patients.home_city', '=', 'cities.city_id');
-    //             })
+                ->leftJoinSub($cities, 'cities', function ($join) {
+                    $join->on('patients.home_city', '=', 'cities.city_id');
+                })
 
-    //             ->leftJoinSub($provinces, 'provinces', function ($join) {
-    //                 $join->on('patients.home_province', '=', 'provinces.province_id');
-    //             })
+                ->leftJoinSub($provinces, 'provinces', function ($join) {
+                    $join->on('patients.home_province', '=', 'provinces.province_id');
+                })
 
-    //             ->leftJoinSub($regions, 'regions', function ($join) {
-    //                 $join->on('patients.home_region', '=', 'regions.region_id');
-    //             })
-    //             ->select(
-    //                 'patientreferral.id',
-    //                 'patientreferral.stid',
-    //                 'patientreferral.date',
-    //                 'patientreferral.time',
-    //                 'patientreferral.preferfrom',
-    //                 'patientreferral.preferto',
-    //                 'patientreferral.reasonrefer',
-    //                 'patientreferral.tentdiagnose',
-    //                 'patientreferral.treatmentmedgiven',
-    //                 'patients.fname as patient_fname',
-    //                 'patients.lname as patient_lname',
-    //                 'patients.mname as patient_mname',
-    //                 'patients.sex',
-    //                 'patients.birthdate',
-    //                 'patients.c_status',
-    //                 'patients.category',
-    //                 'barangays.name as bname',
-    //                 'cities.name as cname',
-    //                 'provinces.name as pname',
-    //                 'regions.name as rname'
-    //             )
-    //             ->where('patientreferral.id', $id)
-    //             ->get();
+                ->leftJoinSub($regions, 'regions', function ($join) {
+                    $join->on('patients.home_region', '=', 'regions.region_id');
+                })
+                ->select(
+                    'patientreferral.id',
+                    'patientreferral.stid',
+                    'patientreferral.date',
+                    'patientreferral.time',
+                    'patientreferral.preferfrom',
+                    'patientreferral.preferto',
+                    'patientreferral.reasonrefer',
+                    'patientreferral.tentdiagnose',
+                    'patientreferral.treatmentmedgiven',
+                    'patients.fname as patient_fname',
+                    'patients.lname as patient_lname',
+                    'patients.mname as patient_mname',
+                    'patients.sex',
+                    'patients.birthdate',
+                    'patients.c_status',
+                    'patients.category',
+                    'barangays.name as bname',
+                    'cities.name as cname',
+                    'provinces.name as pname',
+                    'regions.name as rname'
+                )
+                ->where('patientreferral.id', $id)
+                ->get();
 
-    //     $data = [
-    //         'pref' => $pref,
-    //     ];
+        $data = [
+            'pref' => $pref,
+        ];
         
 
-    //     $pdf = PDF::loadView('patientvisit.patientvisit_listreferralpdf', $data)->setPaper('Legal', 'portrait');
-    //     return $pdf->stream();
-    // }
-
-    public function referralPDF($id)
-{
-    // 1. Fetch from main database (default connection)
-    $pref = PatientReferral::join('patients', 'patientreferral.stid', '=', 'patients.id')
-        ->select(
-            'patientreferral.id',
-            'patientreferral.stid',
-            'patientreferral.date',
-            'patientreferral.time',
-            'patientreferral.preferfrom',
-            'patientreferral.preferto',
-            'patientreferral.reasonrefer',
-            'patientreferral.tentdiagnose',
-            'patientreferral.treatmentmedgiven',
-            'patients.fname as patient_fname',
-            'patients.lname as patient_lname',
-            'patients.mname as patient_mname',
-            'patients.sex',
-            'patients.birthdate',
-            'patients.c_status',
-            'patients.category',
-            'patients.home_brgy',
-            'patients.home_city',
-            'patients.home_province',
-            'patients.home_region'
-        )
-        ->where('patientreferral.id', $id)
-        ->first(); // just one record
-
-    if (!$pref) {
-        abort(404, 'Referral not found.');
+        $pdf = PDF::loadView('patientvisit.patientvisit_listreferralpdf', $data)->setPaper('Legal', 'portrait');
+        return $pdf->stream();
     }
-
-    // 2. Query address data from second server (settings DB)
-    $address = [];
-
-    if ($pref->home_brgy) {
-        $address['barangay'] = DB::connection('settings')
-            ->table('barangays')
-            ->where('id', $pref->home_brgy)
-            ->value('name');
-    }
-
-    if ($pref->home_city) {
-        $address['city'] = DB::connection('settings')
-            ->table('cities')
-            ->where('city_id', $pref->home_city)
-            ->value('name');
-    }
-
-    if ($pref->home_province) {
-        $address['province'] = DB::connection('settings')
-            ->table('provinces')
-            ->where('province_id', $pref->home_province)
-            ->value('name');
-    }
-
-    if ($pref->home_region) {
-        $address['region'] = DB::connection('settings')
-            ->table('regions')
-            ->where('region_id', $pref->home_region)
-            ->value('name');
-    }
-
-    // 3. Combine data for PDF
-    $data = [
-        'pref' => $pref,
-        'address' => $address,
-    ];
-
-    // 4. Generate PDF
-    $pdf = PDF::loadView('patientvisit.patientvisit_listreferralpdf', $data)
-        ->setPaper('Legal', 'portrait');
-
-    return $pdf->stream();
-}
-
 }
