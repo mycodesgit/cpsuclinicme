@@ -93,14 +93,14 @@
         <div class="details" style="margin-top: 5px;">
             <div style="display: inline-block; margin-left: 5px; vertical-align: top; text-align: left; width: 20px; margin-top: -5px;">
                 <span style="font-family: DejaVu Sans, sans-serif; text-transform: uppercase;">
-                    ({{ $pref->first()->category == 'Student' ? '✔' : ' ' }})
+                    ({{ $pref->category == 'Student' ? '✔' : ' ' }})
                 </span>
             </div>
             <span style="display: inline-block; width: 30px; vertical-align: top; font-weight:bold; margin-left: 5px">Student</span>
 
             <div style="display: inline-block; margin-left: 35px; vertical-align: top; text-align: left; width: 20px; margin-top: -5px;">
                 <span style="font-family: DejaVu Sans, sans-serif; text-transform: uppercase;">
-                    ({{ $pref->first()->category == 'Employee' ? '✔' : ' ' }})
+                    ({{ $pref->category == 'Employee' ? '✔' : ' ' }})
                 </span>
             </div>
             <span style="display: inline-block; width: 80px; vertical-align: top; font-weight:bold">Personnel</span>
@@ -116,7 +116,7 @@
             <div style="display: inline-block; vertical-align: top; text-align: left; width: 150px; margin-left: 35px; margin-top: -5px !important">
                 <span style="font-weight: bold;">
                     <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
-                        ({{ $pref->first()->preferfrom == 'Medical Doctor' ? '✔' : ' ' }})
+                        ({{ $pref->preferfrom == 'Medical Doctor' ? '✔' : ' ' }})
                     </span>
                     Medical Doctor
                 </span>
@@ -124,7 +124,7 @@
             <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 150px; margin-top: -5px !important">
                 <span style="font-weight: bold;">
                     <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
-                        ({{ $pref->first()->preferfrom == 'School Nurse' ? '✔' : ' ' }})
+                        ({{ $pref->preferfrom == 'School Nurse' ? '✔' : ' ' }})
                     </span>
                     School Nurse
                 </span>
@@ -132,7 +132,7 @@
             <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 170px; margin-top: -5px !important">
                 <span style="font-weight: bold;">
                     <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
-                        ({{ $pref->first()->preferfrom == 'Dentist' ? '✔' : ' ' }})
+                        ({{ $pref->preferfrom == 'Dentist' ? '✔' : ' ' }})
                     </span>
                     Dentist
                 </span>
@@ -144,7 +144,7 @@
             <div style="display: inline-block; vertical-align: top; text-align: left; width: 150px; margin-left: 35px; margin-top: -5px !important">
                 <span style="font-weight: bold;">
                     <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
-                        ({{ $pref->first()->preferto == 'Medical Doctor' ? '✔' : ' ' }})
+                        ({{ $pref->preferto == 'Medical Doctor' ? '✔' : ' ' }})
                     </span>
                     Medical Doctor
                 </span>
@@ -152,7 +152,7 @@
             <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 150px; margin-top: -5px !important">
                 <span style="font-weight: bold;">
                     <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
-                        ({{ $pref->first()->preferto == 'CHO' ? '✔' : ' ' }})
+                        ({{ $pref->preferto == 'CHO' ? '✔' : ' ' }})
                     </span>
                     CHO
                 </span>
@@ -160,7 +160,7 @@
             <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 110px; margin-top: -5px !important">
                 <span style="font-weight: bold;">
                     <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
-                        ({{ $pref->first()->preferto == 'Dentist' ? '✔' : ' ' }})
+                        ({{ $pref->preferto == 'Dentist' ? '✔' : ' ' }})
                     </span>
                     Dentist
                 </span>
@@ -168,7 +168,7 @@
             <div style="display: inline-block; margin-left: 0px; vertical-align: top; text-align: left; width: 120px; margin-top: -5px !important">
                 <span style="font-weight: bold;">
                     <span style="font-family: DejaVu Sans, sans-serif; font-weight: bold;">
-                        ({{ $pref->first()->preferto == 'Radiologist' ? '✔' : ' ' }})
+                        ({{ $pref->preferto == 'Radiologist' ? '✔' : ' ' }})
                     </span>
                     Radiologist
                 </span>
@@ -214,7 +214,7 @@
             <label style="font-weight: bold; font-family: DejaVu Sans">Reason for Referral:</label>
             <div class="comment-lines">
                 @php
-		            $referreason = explode("\n", wordwrap($pref->first()->reasonrefer ?? '', 900, "\n", true));
+		            $referreason = explode("\n", wordwrap($pref->reasonrefer ?? '', 900, "\n", true));
 		        @endphp
 		        @for($i = 0; $i < 3; $i++)
 		            <div class="line">
@@ -228,7 +228,7 @@
             <label style="font-weight: bold; font-family: DejaVu Sans">Tentative Diagnosis:</label>
             <div class="comment-lines">
                 @php
-		            $refertent = explode("\n", wordwrap($pref->first()->tentdiagnose ?? '', 900, "\n", true));
+		            $refertent = explode("\n", wordwrap($pref->tentdiagnose ?? '', 900, "\n", true));
 		        @endphp
 		        @for($i = 0; $i < 3; $i++)
 		            <div class="line">
@@ -242,7 +242,7 @@
             <label style="font-weight: bold; font-family: DejaVu Sans">Treatment/Medications Given:</label>
             <div class="comment-lines">
                 @php
-		            $refertreat = explode("\n", wordwrap($pref->first()->treatmentmedgiven ?? '', 900, "\n", true));
+		            $refertreat = explode("\n", wordwrap($pref->treatmentmedgiven ?? '', 900, "\n", true));
 		        @endphp
 		        @for($i = 0; $i < 3; $i++)
 		            <div class="line">
