@@ -159,7 +159,7 @@
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapseTwo" class="collapse" data-parent="#accordion" style="">
+                                        <div id="collapseTwo" class="collapse show" data-parent="#accordion" style="">
                                             <div class="card-body p-1">
                                                 <ul class="nav nav-pills flex-column">
                                                     @if (isset($referral))
@@ -197,7 +197,7 @@
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="collapseThree" class="collapse" data-parent="#accordion" style="">
+                                        <div id="collapseThree" class="collapse show" data-parent="#accordion" style="">
                                             <div class="card-body p-1">
                                                 
                                             </div>
