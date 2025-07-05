@@ -49,7 +49,7 @@
             <span style="display: inline-block; width: 1px; vertical-align: top;">&nbsp;</span>
             <div style="display: inline-block; margin-left: 20px; vertical-align: top; text-align: center; border-bottom: 1px solid black; width: 160px;">
                 <span style="font-weight: bold; text-transform: normal;">
-                    {{ \Carbon\Carbon::parse($pref->first()->date)->format('F d, Y') }}
+                    {{ \Carbon\Carbon::parse($pref->date)->format('F d, Y') }}
                 </span>
             </div>
             <div style="text-align: center; width: 200px; margin-left: 0px; font-family: DejaVu Sans,">
