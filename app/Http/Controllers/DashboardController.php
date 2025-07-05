@@ -28,6 +28,7 @@ class DashboardController extends Controller
         $remarks1 = Patients::where('pexam_remarks', 1)->where('category', '=', 'Student')->get();
         $remarks2 = Patients::where('pexam_remarks', 2)->where('category', '=', 'Student')->get();
         $remarks3 = Patients::where('pexam_remarks', 3)->where('category', '=', 'Student')->get();
+        $remarks4 = Patients::whereNull('pexam_remarks')->where('category', '=', 'Student')->get();
      
         $collegeCounts = [];
         $collegeAcronyms = [];
@@ -97,7 +98,7 @@ class DashboardController extends Controller
             ];
         }, array_keys($aggregatedComplaintCounts));
 
-        return view('home.dashboard', compact('patients', 'users', 'pstudent', 'pemployee', 'pguest', 'remarks1', 'remarks2', 'remarks3', 'collegeCounts', 'collegeAcronyms', 'result'));
+        return view('home.dashboard', compact('patients', 'users', 'pstudent', 'pemployee', 'pguest', 'remarks1', 'remarks2', 'remarks3', 'remarks4', 'collegeCounts', 'collegeAcronyms', 'result'));
     }
 
     public function logout(){

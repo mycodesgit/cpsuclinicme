@@ -23,10 +23,11 @@
                 'Fit for enrollment',
                 'Not fit for enrollment',
                 'Pending',
+                'Forgot to Select Remarks',
             ],
             datasets: [{
-                data: [{{ count($remarks1) }}, {{ count($remarks2) }}, {{ count($remarks3) }}],
-                backgroundColor: ['#00a65a', '#00c0ef', '#3c8dbc'],
+                data: [{{ count($remarks1) }}, {{ count($remarks2) }}, {{ count($remarks3) }}, {{ count($remarks4) }}],
+                backgroundColor: ['#00a65a', '#dc3545', '#ffc107', '#17a2b8'],
             }]
         }
         var donutOptions1 = {
