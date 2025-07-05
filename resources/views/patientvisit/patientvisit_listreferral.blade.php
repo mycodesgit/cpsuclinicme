@@ -28,7 +28,7 @@
                                 <label class="badge badge-secondary">List of Patients</label><br>
                                 <div style="display:flex">
                                     <select id="mySelectrefer" name="id"
-                                        class="form-control mb-3 select2 form-control-sm update-field"
+                                        class="form-control mb-3 select2bs4 form-control-sm update-field"
                                         onchange="visitSearch('mySelectrefer', '{{ route('referPatientVisitSearch', ':id') }}')"
                                         style="width:100%">
                                         <option value="">Select Patient</option>

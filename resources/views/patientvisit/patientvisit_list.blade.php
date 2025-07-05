@@ -29,7 +29,7 @@
                                 <label class="badge badge-secondary">List of Patients</label><br>
                                 <div style="display:flex">
                                     <select id="mySelect" name="id"
-                                        class="form-control mb-3 select2 form-control-sm update-field"
+                                        class="form-control mb-3 select2bs4 form-control-sm update-field"
                                         onchange="visitSearch('mySelect', '{{ route('consultPatientVisitSearch', ':id') }}')" style="width:100%">
                                         <option value="">Select Patient</option>
                                     </select>

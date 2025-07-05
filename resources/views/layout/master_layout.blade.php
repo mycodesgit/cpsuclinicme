@@ -185,6 +185,16 @@
                 "lengthMenu": [5, 10, 25, 50, 100] 
             });
         });
+
+        $(function () {
+            $('.select2').select2();
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4',
+                height: '100',
+            })
+        });
     </script>
 
     @if(request()->is('dashboard'))
