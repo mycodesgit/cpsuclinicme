@@ -29,7 +29,7 @@
                         <h4>Reports </h4>
                     </div>
                     <label class="badge badge-secondary">Search Patient:</label><br>
-                    <select id="mySelect" name="id" class="form-control mb-3 select2 form-control-sm student-report"
+                    <select id="mySelect" name="id" class="form-control mb-3 select2bs4 form-control-sm student-report"
                         style="width:100%">
                         <option value="">Select Patient</option>
                     
