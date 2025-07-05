@@ -43,11 +43,11 @@ class PatientUpcomingController extends Controller
 
     public function getStudentUpcomingData(Request $request)
     {
-        //$currentYear = Carbon::now()->year;
+        $currentYear = Carbon::now()->year;
         //$currentMonth = Carbon::now()->month;
-        $data = Patients::select('patients.*')
+        $data = Patients::whereYear('patients.created_at', $currentYear)
             //->whereMonth('patients.created_at', '>=', $currentMonth)
-            //->whereYear('patients.created_at', $currentYear)
+            ->select('patients.*')
             ->orderBy('patients.created_at', 'ASC')
             ->get()
             ->map(function ($patient) {
@@ -58,6 +58,7 @@ class PatientUpcomingController extends Controller
                     'mname' => $patient->mname,
                     'sex' => $patient->sex,
                     'c_status' => $patient->c_status,
+                    'pexam_remarks' => $patient->pexam_remarks,
                 ];
             });
         

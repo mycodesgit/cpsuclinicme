@@ -32,20 +32,20 @@ $(document).ready(function() {
             }, 
             { data: 'sex' },   
             { data: 'c_status' },   
-            // { 
-            //     data: 'pexam_remarks', 
-            //     render: function(data, type, row) {
-            //         if (data === 1) {
-            //             return '<span class="badge badge-success">Fit for enrollment</span>';
-            //         } else if (data === 2) {
-            //             return '<span class="badge badge-danger">Not fit for enrollment</span>';
-            //         } else if (data === 3) {
-            //             return `<span class="badge badge-warning" data-toggle="tooltip" title="${row.pend_reason}">Pending</span>`;
-            //         } else {
-            //             return '';
-            //         }
-            //     }
-            // },
+            { 
+                data: 'pexam_remarks', 
+                render: function(data, type, row) {
+                    if (data == 1) {
+                        return '<span class="badge badge-success">Fit for enrollment</span>';
+                    } else if (data == 2) {
+                        return '<span class="badge badge-danger">Not fit for enrollment</span>';
+                    } else if (data == 3) {
+                        return `<span class="badge badge-warning" data-toggle="tooltip" title="${row.pend_reason}">Pending</span>`;
+                    } else {
+                        return '';
+                    }
+                }
+            },
             {
                 data: 'id',
                 render: function(data, type, row) {
