@@ -43,11 +43,11 @@ class PatientUpcomingController extends Controller
 
     public function getStudentUpcomingData(Request $request)
     {
-        $currentYear = Carbon::now()->year;
-        $currentMonth = Carbon::now()->month;
-        $data = Patients::whereYear('patients.created_at', $currentYear)
-            ->whereMonth('patients.created_at', '>=', $currentMonth)
-            ->select('patients.*')
+        //$currentYear = Carbon::now()->year;
+        //$currentMonth = Carbon::now()->month;
+        $data = Patients::select('patients.*')
+            //->whereMonth('patients.created_at', '>=', $currentMonth)
+            //->whereYear('patients.created_at', $currentYear)
             ->orderBy('patients.created_at', 'ASC')
             ->get()
             ->map(function ($patient) {
