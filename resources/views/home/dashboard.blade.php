@@ -25,7 +25,7 @@
             <div class="small-box bg-info d-flex align-items-center justify-content-between p-3 card-curve" style="background-color:#89c9b6 !important; color: #ffffff !important;">
                 <div class="text-left">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>{{ $ptodayvisits }}</h3>
                         <p>Patient Today</p>
                     </div>
                 </div>
@@ -42,8 +42,8 @@
             <div class="small-box bg-info d-flex align-items-center justify-content-between p-3 card-curve" style="background-color:#9dcda8 !important; color: #ffffff !important;">
                 <div class="text-left">
                     <div class="inner">
-                        <h3>0</h3>
-                        <p>Medicines</p>
+                        <h3>{{ $pthismonthvisits }}</h3>
+                        <p>Patients for this Month</p>
                     </div>
                 </div>
                 <div class="text-right">
@@ -72,7 +72,7 @@
         </div>
 
         <!-- Patient Donut Chart -->
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="card" style="background-color: #d5d5d5;">
                 <div class="card-header">
                     <h3 class="card-title">Patient</h3>
@@ -89,10 +89,10 @@
         </div>
 
         <!-- Bar Chart Patient Visit Monthly Report -->
-        <div class="col-md-7 " >
+        <div class="col-md-4">
             <div class="card" style="background-color: #d5d5d5;" >
                 <div class="card-header" >
-                    <h3 class="card-title">Patient Visit Monthly Report - {{ \Carbon\Carbon::now()->format('F d, Y') }}</h3>
+                    <h3 class="card-title">Patient Visit Today - {{ \Carbon\Carbon::now()->format('F d, Y') }}</h3>
                     <div class="card-tools" >
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
@@ -104,9 +104,25 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="card" style="background-color: #d5d5d5;" >
+                <div class="card-header" >
+                    <h3 class="card-title">Patient Visit This Month - {{ \Carbon\Carbon::now()->format('F Y') }}</h3>
+                    <div class="card-tools" >
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="currcollegevisitBarChartMonthh" style="height:250px; min-height:250px"></canvas>
+                </div>
+            </div>
+        </div>
         
         <!-- Student Remarks Donut Chart -->
-        <div class="col-lg-5 col-md-12">
+        <div class="col-md-4">
             <div class="card" style="background-color: #d5d5d5;">
                 <div class="card-header">
                     <h3 class="card-title">Student Remarks</h3>
@@ -122,7 +138,7 @@
             </div>
         </div>
         
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="card" style="background-color: #d5d5d5;" >
                 <div class="card-header" >
                     <h3 class="card-title">Patient Visit Monthly Complaints</h3>

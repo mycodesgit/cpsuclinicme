@@ -202,6 +202,9 @@
         <script>
             var collegeCounts = {!! json_encode($collegeCounts) !!};
             var collegeAcronyms = {!! json_encode($collegeAcronyms) !!};
+
+            var collegeCountsmonth = {!! json_encode($collegeCountsmonth) !!};
+            var collegeAcronymsmonth = {!! json_encode($collegeAcronymsmonth) !!};
         </script>
     @endif
 

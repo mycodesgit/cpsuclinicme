@@ -19,6 +19,10 @@ class DashboardController extends Controller
     public function dash()
     {
         $patients = Patients::count();
+        $ptodayvisits = Patientvisit::whereDate('created_at', Carbon::today())->count();
+        $pthismonthvisits = Patientvisit::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->count();
         $users = User::all();
 
         $pstudent = Patients::where('category', '=', 'Student')->get();
@@ -33,10 +37,33 @@ class DashboardController extends Controller
         $collegeCounts = [];
         $collegeAcronyms = [];
 
+        $collegeCountsmonth = [];
+        $collegeAcronymsmonth = [];
+
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
         $programs = DB::table('college')
+            ->leftJoin('patients', 'college.college_abbr', '=', 'patients.studCollege')
+            ->leftJoin('patientvisits', function ($join) {
+            $join->on('patients.id', '=', 'patientvisits.stid')
+                ->whereDate('patientvisits.created_at', '=', Carbon::today());
+            })
+            ->select(
+            'college.college_abbr',
+            DB::raw('COUNT(patientvisits.id) as count')
+            )
+            ->groupBy('college.college_abbr')
+            ->orderBy('college.college_abbr')
+            ->get();
+
+        // Populate arrays for chart
+        foreach ($programs as $program) {
+            $collegeAcronyms[] = $program->college_abbr;
+            $collegeCounts[] = (int) $program->count; // Ensure numeric
+        }
+
+        $programsmonth = DB::table('college')
             ->leftJoin('patients', 'college.college_abbr', '=', 'patients.studCollege')
             ->leftJoin('patientvisits', function ($join) use ($currentMonth, $currentYear) {
                 $join->on('patients.id', '=', 'patientvisits.stid')
@@ -52,9 +79,9 @@ class DashboardController extends Controller
             ->get();
 
         // Populate arrays for chart
-        foreach ($programs as $program) {
-            $collegeAcronyms[] = $program->college_abbr;
-            $collegeCounts[] = (int) $program->count; // Ensure numeric
+        foreach ($programsmonth as $program) {
+            $collegeAcronymsmonth[] = $program->college_abbr;
+            $collegeCountsmonth[] = (int) $program->count; // Ensure numeric
         }
 
         $complaintsCount = Patientvisit::select('chief_complaint')
@@ -98,7 +125,7 @@ class DashboardController extends Controller
             ];
         }, array_keys($aggregatedComplaintCounts));
 
-        return view('home.dashboard', compact('patients', 'users', 'pstudent', 'pemployee', 'pguest', 'remarks1', 'remarks2', 'remarks3', 'remarks4', 'collegeCounts', 'collegeAcronyms', 'result'));
+        return view('home.dashboard', compact('patients', 'ptodayvisits', 'pthismonthvisits', 'users', 'pstudent', 'pemployee', 'pguest', 'remarks1', 'remarks2', 'remarks3', 'remarks4', 'collegeCounts', 'collegeAcronyms', 'collegeCountsmonth', 'collegeAcronymsmonth', 'result'));
     }
 
     public function logout(){
