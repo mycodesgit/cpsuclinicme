@@ -115,6 +115,11 @@
                                         <div id="collapseOne" class="collapse show" data-parent="#accordion" style="">
                                             <div class="card-body p-1">
                                                 <ul class="nav nav-pills flex-column">
+                                                    <li class="nav-item active">
+                                                        <a href="{{ route('peheReport', $patientSearch->first()->id) }}" target="_blank" class="nav-link">
+                                                            <i class="fas fa-file-pdf" style="color: #fc5e5e"></i> Pre-entrance health examination
+                                                        </a>
+                                                    </li>
                                                     @if (isset($patientVisit) && count($patientVisit) > 0)
                                                         @php $patient = $patientVisit[0]; @endphp
                                                         <li class="nav-item active">
