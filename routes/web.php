@@ -70,7 +70,7 @@ Route::group(['middleware'=>['login_auth']],function(){
 
         
 
-        Route::delete('list/delete/{id}', [PatientController::class, 'patientDelete'])->name('patientDelete');
+        Route::post('list/delete/{id}', [PatientController::class, 'patientDelete'])->name('patientDelete');
     }); 
 
     Route::prefix('/medicine')->group(function(){

@@ -387,8 +387,9 @@ class PatientController extends Controller
     
     public function patientDelete($id) 
     {
-        $fund = Patients::find($id);
-        $fund->delete();
+        $decryptedId = Crypt::decrypt($id);
+        $patient = Patients::find($decryptedId);
+        $patient->delete();
 
         return response()->json(['success'=> true, 'message'=>'Deleted Successfully',]);
     }

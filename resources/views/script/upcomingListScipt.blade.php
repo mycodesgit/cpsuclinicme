@@ -103,12 +103,8 @@ $(document).on('click', '.patient-delete', function(e) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "{{ route('patientDelete', ':id') }}".replace(':id', id),
                 type: "POST",
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    _method: 'DELETE'
-                },
+                url: "{{ route('patientDelete', ':id') }}".replace(':id', id),
                 success: function(response) {
                     $("#tr-" + id).delay(1000).fadeOut();
                     Swal.fire({
