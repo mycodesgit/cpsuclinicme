@@ -14,6 +14,7 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\PatientvisitController;
 use App\Http\Controllers\PatientvisitReferralController;
+use App\Http\Controllers\PatientvisitToothExtractController;
 use App\Http\Controllers\MedicineController;
 
 /*
@@ -69,7 +70,7 @@ Route::group(['middleware'=>['login_auth']],function(){
 
         
 
-        Route::get('list/delete/{id}', [PatientController::class, 'patientDelete'])->name('patientDelete');
+        Route::post('list/delete/{id}', [PatientController::class, 'patientDelete'])->name('patientDelete');
     }); 
 
     Route::prefix('/medicine')->group(function(){
@@ -98,6 +99,9 @@ Route::group(['middleware'=>['login_auth']],function(){
         Route::get('/view/refer/list/viewlistajax/{id}', [PatientvisitReferralController::class, 'getreferralRead'])->name('getreferralRead');
         Route::post('/view/refer/list/update', [PatientvisitReferralController::class, 'referralUpdate'])->name('referralUpdate');
         Route::get('/view/referral/list/pdf/{id}', [PatientvisitReferralController::class, 'referralPDF'])->name('referralPDF');
+
+        Route::get('/view/toothextraction', [PatientvisitToothExtractController::class, 'toothExtractRead'])->name('toothExtractRead');
+        Route::get('/view/toothextraction/list/{id}', [PatientvisitToothExtractController::class, 'toothExtractSearch'])->name('toothExtractSearch');
     });
 
     Route::prefix('/reports')->group(function (){
