@@ -386,11 +386,16 @@ class PatientController extends Controller
         return response()->json(['success' => true]);
     }
     
-    public function patientDelete($id) 
+    public function patientDelete($id)
     {
-        $studpatient = Patients::find($id);
-        $studpatient->delete();
+        try {
+            $decryptedId = Crypt::decryptString($id);
+            $studpatient = Patients::findOrFail($decryptedId);
+            $studpatient->delete();
 
-        return response()->json(['success'=> true, 'message'=>'Deleted Successfully',]);
+            return response()->json(['success' => true, 'message' => 'Deleted Successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Delete Failed: ' . $e->getMessage()], 500);
+        }
     }
 }
