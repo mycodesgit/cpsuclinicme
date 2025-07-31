@@ -65,7 +65,7 @@ $(document).ready(function() {
                             <a href="${reportsReadUrl}" class="mr-1 btn btn-warning btn-sm" title="Pre-Entrance Health Examination Report">
                                 <i class="fas fa-file-pdf"></i> 
                             </a>
-                            <button class="mr-1 btn btn-danger btn-sm patient-delete" data-id="${encryptedId}" title="Delete">
+                            <button class="mr-1 btn btn-danger btn-sm patient-delete" data-id="${data}" title="Delete">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -103,8 +103,12 @@ $(document).on('click', '.patient-delete', function(e) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                type: "POST",
                 url: "{{ route('patientDelete', ':id') }}".replace(':id', id),
+                type: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    _method: 'DELETE'
+                },
                 success: function(response) {
                     $("#tr-" + id).delay(1000).fadeOut();
                     Swal.fire({
