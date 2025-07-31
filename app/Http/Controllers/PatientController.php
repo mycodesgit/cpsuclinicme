@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Carbon\Carbon;
 
 use App\Models\ClinicDB\Patients;
@@ -386,16 +387,22 @@ class PatientController extends Controller
         return response()->json(['success' => true]);
     }
     
-    public function patientDelete($id) 
+    public function patientDelete($id)
     {
-        $decryptedId = Crypt::decrypt($id);
-        $patient = Patients::find($decryptedId);
-        
-        if ($patient) {
-            $patient->delete();
-            return response()->json(['success'=> true, 'message'=>'Deleted Successfully']);
-        }
+        try {
+            $decryptedId = Crypt::decrypt($id);
+            $patient = Patients::find($decryptedId);
 
-        return response()->json(['success'=> false, 'message'=>'Patient not found'], 404);
+            if ($patient) {
+                $patient->delete();
+                return response()->json(['success'=> true, 'message'=>'Deleted Successfully']);
+            }
+
+            return response()->json(['success'=> false, 'message'=>'Patient not found'], 404);
+        } catch (DecryptException $e) {
+            return response()->json(['success'=> false, 'message'=>'Decryption failed', 'error' => $e->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['success'=> false, 'message'=>'Unexpected error', 'error' => $e->getMessage()], 500);
+        }
     }
 }
