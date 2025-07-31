@@ -221,7 +221,7 @@ class PatientController extends Controller
         ]);
     
         //return redirect()->back()->with('success', 'Added Successfully');
-        return redirect()->route('moreInfoupcoming', ['id' => decryptString($patient->id)])->with('success', 'Added Successfully');
+        return redirect()->route('moreInfoupcoming', ['id' => Crypt::decryptString($patient->id)])->with('success', 'Added Successfully');
     }
 
     public function getCollege(Request $request)
