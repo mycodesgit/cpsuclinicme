@@ -65,7 +65,7 @@ $(document).ready(function() {
                             <a href="${reportsReadUrl}" class="mr-1 btn btn-warning btn-sm" title="Pre-Entrance Health Examination Report">
                                 <i class="fas fa-file-pdf"></i> 
                             </a>
-                            <button class="mr-1 btn btn-danger btn-sm patient-delete" data-id="${encryptedId}" title="Delete">
+                            <button class="mr-1 btn btn-danger btn-sm patient-delete" data-id="${data}" title="Delete">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
