@@ -90,8 +90,9 @@ $(document).on('click', '.patient-delete', function(e) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
+        }
     });
+
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to recover this!",
@@ -114,13 +115,14 @@ $(document).on('click', '.patient-delete', function(e) {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    if(response.success) {
+                    if (response.success) {
                         toastr.success(response.message);
                         console.log(response);
                     }
                 }
             });
         }
-    })
+    });
 });
+
 </script>
