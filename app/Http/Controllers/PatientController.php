@@ -388,14 +388,14 @@ class PatientController extends Controller
     
     public function patientDelete($id) 
     {
-        try {
-            $decryptedId = Crypt::decrypt($id);
-            $patient = Patients::findOrFail($decryptedId);
+        $decryptedId = Crypt::decrypt($id);
+        $patient = Patients::find($decryptedId);
+        
+        if ($patient) {
             $patient->delete();
-
-            return response()->json(['success' => true, 'message' => 'Deleted Successfully']);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Invalid ID'], 404);
+            return response()->json(['success'=> true, 'message'=>'Deleted Successfully']);
         }
+
+        return response()->json(['success'=> false, 'message'=>'Patient not found'], 404);
     }
 }
