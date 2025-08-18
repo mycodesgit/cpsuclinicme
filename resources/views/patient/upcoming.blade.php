@@ -29,6 +29,7 @@
                                     <th class="text-left">Name</th>
                                     <th class="text-left">Gender</th>
                                     <th class="text-left">Civil Status</th>
+                                    <th class="text-left">Course</th>
                                     <th class="text-left">Status</th>
                                     <th class="text-left">Action</th>
                                 </tr>

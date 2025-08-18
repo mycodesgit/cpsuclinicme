@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('medicine');
             $table->integer('qty');
+            $table->string('expirydate');
             $table->timestamps();
         });
     }

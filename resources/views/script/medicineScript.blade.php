@@ -46,6 +46,15 @@
             "columns": [
                 {data: 'medicine'},
                 {data: 'qty'},
+                {data: 'expirydate',
+                        render: function (data, type, row) {
+                        if (type === 'display') {
+                            return moment(data).format('MMMM D, YYYY');
+                        } else {
+                            return data;
+                        }
+                    }
+                },
                 {
                     data: 'id',
                     render: function(data, type, row) {
@@ -53,7 +62,7 @@
                             var dropdown = '<div class="d-inline-block">' +
                                 '<a class="btn btn-primary btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown"></a>' +
                                 '<div class="dropdown-menu">' +
-                                '<a href="#" class="dropdown-item btn-mededit" data-id="' + row.id + '" data-medicine="' + row.medicine + '" data-qty="' + row.qty + '">' +
+                                '<a href="#" class="dropdown-item btn-mededit" data-id="' + row.id + '" data-medicine="' + row.medicine + '" data-qty="' + row.qty + '" data-expirydate="' + row.expirydate + '">' +
                                 '<i class="fas fa-pen"></i> Edit' +
                                 '</a>' +
                                 '<button type="button" value="' + data + '" class="dropdown-item med-delete">' +
@@ -81,10 +90,12 @@
         var id = $(this).data('id');
         var medName = $(this).data('medicine');
         var qtyCount = $(this).data('qty');
+        var expiryDate = $(this).data('expirydate');
 
         $('#editMedicineId').val(id);
         $('#editMedicineName').val(medName);
         $('#editMedicineQty').val(qtyCount);
+        $('#editMedicineExpiry').val(expiryDate);
         $('#editMedicineModal').modal('show');
     });
 

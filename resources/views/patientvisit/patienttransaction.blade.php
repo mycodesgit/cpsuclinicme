@@ -273,7 +273,6 @@
                     dynamicFieldsContainer.removeChild(rows[rows.length - 1]);
                 }
 
-
                 toggleRemoveButton();
             });
         });

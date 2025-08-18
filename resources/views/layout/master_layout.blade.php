@@ -232,6 +232,10 @@
         @include('script.patientVisitReferralScript')
     @endif
 
+    @if(request()->routeIs('consultPatientVisitSearch'))
+        @include('script.consultationScript')
+    @endif
+
     @if(request()->routeIs('medicineRead'))
         @include('script.medicineScript')
     @endif

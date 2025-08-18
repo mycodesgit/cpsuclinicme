@@ -11,11 +11,14 @@ class Patientvisit extends Model
     protected $table ='patientvisits';
 
     protected $fillable=[
+        'stid',
         'date',
         'time',
-        'stid',
-        'contact',
-        'chief_complaint'
+        'chief_complaint',
+        'treatment',
+        'medicine',
+        'qty',
+        'certificate',
     ];
    
     public function patients()

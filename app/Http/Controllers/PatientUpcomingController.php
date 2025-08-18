@@ -57,6 +57,7 @@ class PatientUpcomingController extends Controller
                     'lname' => $patient->lname,
                     'mname' => $patient->mname,
                     'sex' => $patient->sex,
+                    'studCourse' => $patient->studCourse,
                     'c_status' => $patient->c_status,
                     'pexam_remarks' => $patient->pexam_remarks,
                 ];

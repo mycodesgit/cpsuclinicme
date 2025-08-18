@@ -32,6 +32,7 @@ $(document).ready(function() {
             }, 
             { data: 'sex' },   
             { data: 'c_status' },   
+            { data: 'studCourse' },   
             { 
                 data: 'pexam_remarks', 
                 render: function(data, type, row) {

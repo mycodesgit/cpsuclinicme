@@ -19,9 +19,11 @@
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <label class="badge badge-secondary">Medicine Name</label><br>
-                                        <input value="{{ (isset($medicine)) ? $medicine->medicine : '' }}" type="text" name="medicine" class="form-control form-control-sm" autocomplete="off" placeholder="Medicine">
+                                        <input type="text" name="medicine" class="form-control form-control-sm" autocomplete="off" placeholder="Medicine">
                                         <label class="badge badge-secondary">Quantity</label><br>
-                                        <input value="{{ (isset($medicine)) ? $medicine->qty : '' }}" type="number" name="qty" class="form-control form-control-sm" autocomplete="off" placeholder="Quantity">
+                                        <input type="number" name="qty" class="form-control form-control-sm" autocomplete="off" placeholder="Quantity">
+                                        <label class="badge badge-secondary">Expiry Date</label><br>
+                                        <input type="date" name="expirydate" class="form-control form-control-sm" autocomplete="off" placeholder="Expiry Date">
                                     </div>
                                    <br>
                                    <button type="submit" class="btn btn-success mt-3">{{ (isset($medicine)) ? 'Update' : 'Save' }}</button>
@@ -40,6 +42,7 @@
                                 <tr>
                                     <th>medicine</th>
                                     <th>Quantity</th>
+                                    <th>Expiry Date</th>
                                     <th class="text-center" width="7%">Action</th>
                                 </tr>
                             </thead>
@@ -73,6 +76,10 @@
                     <div class="form-group">
                         <label for="editMedicineQty">Medicine Name</label>
                         <input type="number" class="form-control" id="editMedicineQty" name="qty">
+                    </div>
+                    <div class="form-group">
+                        <label for="editMedicineExpiry">Expiry Date</label>
+                        <input type="date" class="form-control" id="editMedicineExpiry" name="expirydate">
                     </div>
                 </div>
                 <div class="modal-footer">

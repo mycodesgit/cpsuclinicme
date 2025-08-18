@@ -28,6 +28,7 @@ class MedicineController extends Controller
             $request->validate([
                 'medicine' => 'required',
                 'qty' => 'required',
+                'expirydate' => 'required',
             ]);
 
             $medicineName = $request->input('medicine'); 
@@ -40,7 +41,8 @@ class MedicineController extends Controller
             try {
                 Medicine::create([
                     'medicine' => $request->input('medicine'),
-                    'qty'=> $request->input('qty')
+                    'qty'=> $request->input('qty'),
+                    'expirydate'=> $request->input('expirydate')
                 ]);
 
                 return response()->json(['success' => true, 'message' => 'Medicine stored successfully'], 200);
@@ -55,6 +57,7 @@ class MedicineController extends Controller
         $request->validate([
             'medicine' => 'required',
             'qty' => 'required',
+            'expirydate' => 'required',
         ]);
 
         try {
@@ -68,7 +71,8 @@ class MedicineController extends Controller
             $medcne = Medicine::findOrFail($request->input('id'));
             $medcne->update([
                 'medicine' => $request->input('medicine'),
-                'qty'=> $request->input('qty')
+                'qty'=> $request->input('qty'),
+                'expirydate'=> $request->input('expirydate')
         ]);
             return response()->json(['success' => true, 'message' => 'Medicine update successfully'], 200);
         } catch (\Exception $e) {

@@ -85,7 +85,10 @@ Route::group(['middleware'=>['login_auth']],function(){
         Route::get('/view/consult', [PatientvisitController::class, 'consultPatientRead'])->name('consultPatientRead');
         Route::get('/patientListOption', [PatientvisitController::class, 'patientListOption'])->name('patientListOption');
         Route::get('/list/{id}', [PatientvisitController::class, 'consultPatientVisitSearch'])->name('consultPatientVisitSearch');
+        Route::get('/list/getajax/{id}', [PatientvisitController::class, 'getconsultPatientVisitSearch'])->name('getconsultPatientVisitSearch');
+        Route::post('/listadd', [PatientvisitController::class, 'addPatient'])->name('addPatient');
         Route::get('/transaction/{id}', [PatientvisitController::class, 'consultPatientVisitTransact'])->name('consultPatientVisitTransact');
+
         Route::post('/add', [PatientvisitController::class, 'addPatient'])->name('addPatient');
         Route::get('/students', [PatientvisitController::class, 'ListStudent'])->name('ListStudent');
         Route::post('/studentLogin', [PatientvisitController::class, 'studentLogin'])->name('studentLogin');
